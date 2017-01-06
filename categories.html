@@ -1,0 +1,17 @@
+---
+title: Categories
+---
+<div class="container">
+  <div id="article">
+  <h1>Categories</h1>
+  <ul class="posts">
+      {% for categorie in site.categories %}
+      <li><span>{{ categorie[0] }}</span></li>
+      <ul class="posts">
+        {% for post in categorie[1] %}
+        <li><span><a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a><time class="pull-right post-list">{{ post.date | date_to_string | date: "%b %-d, %Y"  }}</h4></time></span></span></li>
+        {% endfor %}
+      </ul>
+      {% endfor %}
+  </ul>
+</div>
