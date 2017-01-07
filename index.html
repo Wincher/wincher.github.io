@@ -6,7 +6,7 @@ title: WincherToldYou
 {% if site.posts != empty %}
 <div class="recent-posts">
   <h1>Recent Posts</h1>
-  {% for post in site.posts limit: 3 %}
+  {% for post in site.posts limit: 10 %}
     {% if forloop.first %}
       {% assign add_class = 'most-recent' %}
       {% capture fresh_tag %}
