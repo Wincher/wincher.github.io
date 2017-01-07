@@ -1,46 +1,16 @@
 ---
-title: Wy first blog!
-date: 2017-01-03 19:55:14
-categories: jekyll testing
-tags: jekyll blog
+title: My first blog!
+date: 2017-07-07 00:35:14
+categories: 感想
+tags: 感想
 ---
 
-
-Herring Cove is a clean and responsive theme for Jekyll.
-
-
-### Overview
-
-* Fixed Sidebar with social links
-* Minimal design
-* Comments by Disqus
-* Social Sharing abilities
-* Easy to configure
-* Based on Bootstrap
-
-### Screenshots
-
-![screenshot]({{ site.baseurl }}/images/screenshot1.png)
-![screenshot]({{ site.baseurl }}/images/screenshot2.png)
-
-### Setup
-
-1. Install Jekyll
-2. Fork or [download](https://github.com/arnp/herring-cove/archive/master.zip) this theme repo
-3. Edit the `_config.yml` file
-
-You can change the showcase image by replacing `showcase.jpg` file in the `images` folder. I'll try to find a better way to do this soon.
-
-### Download
-
-[download](https://github.com/arnp/herring-cove/archive/master.zip)
-
-### License
-* [MIT](http://opensource.org/licenses/MIT)
-
--------------
-Herring Cove is always a work in progress and as such, I hope to clean up the code and add features as time permits. Feel free to add your own additions.
-
-*What's with the name?*
-
-[Herring Cove](http://www.capecodbeachchair.com/beachguide/index.cfm?page=3&BeachID=5) is a beach on Cape Cod in Provincetown, Massachusetts. If you're in the area, be sure to check it out!
+### 感想
+由于了解某些技术而不常使用，产生了找个地方记录下来的想法，
+之前了解到GitHub pages + jekyll搭建个人免费博客，
+由于是强迫症患者，没完整了解前不愿按照网上的教程搭建完就算了，
+网上的教程虽然步骤详细，但是没能看到详细剖析的，其实可能对于大神们很好理解，
+而对于我这类弱🐔来说却不够透彻，加上个人惰性也就一拖再拖，
+但是最近需要一个平台来记录一些东西的想法越加的渴望，简单理解了原理，用法，
+找了这个自己还喜欢的免费模版改成了现在这个博客，
+但是当这个博客雏形形成我却忽然间觉得没什么值得记录了
