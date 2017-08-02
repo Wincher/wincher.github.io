@@ -3,15 +3,15 @@ Splash:
         title: Blogs
         type: sitelink
         link: /posts
-    # -
+    -
     #     title: Twitter
     #     type: permalink
-    #     link: https://twitter.com/lazzzis
+    #     link: https://twitter.com/wincher
     #     _blank: true
-    -
+    # -
         title: Github
         type: permalink
-        link: https://github.com/lazzzis
+        link: https://github.com/wincher
         _blank: true
     # -
     #     title: Rss
@@ -25,6 +25,10 @@ Splash:
 
 Drawer:
     -
+        title: Home
+        type: sitelink
+        link: /
+    -
         title: Blog
         type: sitelink
         link: /posts
@@ -32,16 +36,16 @@ Drawer:
         title: Tags
         type: sitelink
         link: /tags
-    # -
-    #     title: Links
-    #     type: page
-    #     link: /links
-    # -
-    #     title: About
-    #     type: page
-    #     link: /about
+    -
+        title: Links
+        type: page
+        link: /links
+    -
+        title: About
+        type: page
+        link: /about
 
-# disqus_shortname: lazzzis
+# disqus_shortname: wincher
 
 animated:
     posts: bounceInLeft
