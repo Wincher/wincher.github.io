@@ -194,4 +194,4 @@ Ubuntu 16.04 Server
     ```
     1. 在Hadoop的NameNode上也能查看到刚写入HDFS的数据person.dat  
     http://master:50070/explorer.html#/user/hive/warehouse/test.db/person
-    ![pic](./Screen Shot 2018-02-06 at 16.39.05.png)
+    ![pic](./hive_install/ScreenShot20180206at163905.png)
