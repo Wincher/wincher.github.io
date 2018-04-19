@@ -8,4 +8,6 @@ hexo -v
 npm install hexo-asset-image --save
 
 hexo init  
-npm install  
+hexo g
+hexo s
+hexo g -d  

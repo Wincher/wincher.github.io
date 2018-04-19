@@ -5,7 +5,7 @@ categories: Hive
 tags: Hive
 ---
 
-### 目标
+## 目标
 安装一个基本的Hive环境,由于基本配置的安装,暂时先使用Hive自带的Derby作为元数据存储数据库,当然完全体还是要使用Mysql之类的数据库
 
 ### 环境:
