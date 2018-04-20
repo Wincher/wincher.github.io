@@ -20,11 +20,11 @@ Ubuntu 16.04 Server
 ### 安装Apache Hive
 1. 解压缩Hive  
     `sudo tar -zxvf apache-hive-2.3.2-bin.tar.gz`
-1. 讲解压的apache-hive-2.3.2-bin文件夹移动到/usr/local下并更名为hive</br>
+- 讲解压的apache-hive-2.3.2-bin文件夹移动到/usr/local下并更名为hive</br>
     `mv apache-hive-2.3.2-bin /usr/local/hive`
-1. 解压Hive  
+- 解压Hive  
     `sudo tar -zxvf apache-hive-2.3.2-bin.tar.gz`
-1. 配置环境变量  
+- 配置环境变量  
     `vim /etc/profile`  
     在文件尾部添加  
     ```
@@ -38,7 +38,7 @@ Ubuntu 16.04 Server
 1. 进入$HIVE_HOME/conf,复制hive-env.sh.template为hive-env.sh
     `cd $HIVE_HOME/conf`
     `cp hive-env.sh.template hive-env.sh`
-1. 编辑hive-site.xml配置文件  
+- 编辑hive-site.xml配置文件  
     `vim hive-env.sh`  
     添加如下内容
     ```
@@ -46,12 +46,12 @@ Ubuntu 16.04 Server
     export HIVE_CONF_DIR=/usr/local/hive/conf
     export HIVE_AUX_JARS_PATH=/usr/local/hive/lib
     ```
-1. 进入$HIVE_HOME/conf,复制hive-default.xml.template为hive-site.xml
+- 进入$HIVE_HOME/conf,复制hive-default.xml.template为hive-site.xml
     ```
     cd $HIVE_HOME/conf  
     cp hive-default.xml.template hive-site.xml
     ```
-1. 编辑hive-site.xml配置文件,替换所有的{$system:java.io.tmpdir}为/usr/local/hive/tmp  
+- 编辑hive-site.xml配置文件,替换所有的{$system:java.io.tmpdir}为/usr/local/hive/tmp  
     替换所有的{$system:user.name}为root
     ```
     vim hive-site.xml
@@ -90,7 +90,7 @@ Ubuntu 16.04 Server
     </property>
     ```
 
-1. 使用Hadoop新建hdfs目录,对用hive-site.xml中有如下配置：
+- 使用Hadoop新建hdfs目录,对用hive-site.xml中有如下配置：
     ```
     <property>
         <name>hive.metastore.warehouse.dir</name>
@@ -123,7 +123,7 @@ Ubuntu 16.04 Server
 ### 使用HIVE
 1. 初始化derby
     schematool -initSchema -dbType derby
-1. 使用(注意使用前需要启动Hadoop的Hdfs和Yarn，start-all.sh包含了这两个的启动)
+- 使用(注意使用前需要启动Hadoop的Hdfs和Yarn，start-all.sh包含了这两个的启动)
     命令行输入,会出现HQL命令行提示符(会有几行log)
     ```
     root@master:/usr/local/hive/conf# hive
@@ -132,20 +132,20 @@ Ubuntu 16.04 Server
     这样就安装完成了，接下来是一些简单的操作:
     1. 查看函数列表  
     `hive>show functions;`
-    1. 查看某个函数的详细信息如:sum
+    - 查看某个函数的详细信息如:sum
     ```
     hive> desc function sum;
     OK
     sum(x) - Returns the sum of a set of numbers
     Time taken: 0.013 seconds, Fetched: 1 row(s)
     ```
-    1. 新建库并使用  
+    - 新建库并使用  
     ```
     hive> create database test;
     OK
     Time taken: 0.448 seconds
     ```
-    1. 新建数据表并查看详情  
+    - 新建数据表并查看详情  
     ```
     hive> create table person(id int, name string) row format delimited fields terminated by '\t';
     OK
@@ -156,7 +156,7 @@ Ubuntu 16.04 Server
     name                	string
     Time taken: 0.083 seconds, Fetched: 2 row(s)
     ```
-    1. 将文件写入表中  
+    - 将文件写入表中  
     在$HIVE_HOME下新建文件person.date,并在文件中添加如下内容,  
     注意id和name间是TAB键,我们在建表语句中用了terminated by '\t',所以这个分割是必须要用TAB键的
 
@@ -172,7 +172,7 @@ Ubuntu 16.04 Server
     009    Morphling
     010    Morphling
     ```
-    1. 将数据倒入并查看是否成功
+    - 将数据倒入并查看是否成功
     ```
     hive> load data local inpath '/usr/local/hive/person.dat' into table test.person;
     Loading data to table test.person
@@ -192,6 +192,6 @@ Ubuntu 16.04 Server
     10	Morphling
     Time taken: 2.671 seconds, Fetched: 10 row(s)
     ```
-    1. 在Hadoop的NameNode上也能查看到刚写入HDFS的数据person.dat  
+    - 在Hadoop的NameNode上也能查看到刚写入HDFS的数据person.dat  
     http://master:50070/explorer.html#/user/hive/warehouse/test.db/person
     ![pic](ScreenShot20180206at163905.png)

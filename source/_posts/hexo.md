@@ -7,16 +7,22 @@ tags:
     - stuff
 ---
 
-## 前言
+1. 前言
+===
   网上有很多写的特别详尽的介绍,这篇文章主要是记录一下整个思路,操作流程,更更多的是作为备忘.
 
-## 环境
-- ### Node.js  
-- ### npm
+2. 环境
+===
+Node.js  
+---
+npm
+---
 >可配置国内源 npm config set registry "https://registry.npm.taobao.org"
-- GitHub账号,创建GitHub博客仓库
-- 本地Git
->```
+GitHub账号,创建GitHub博客仓库
+
+本地Git
+---
+```
 git config --global user.name "GitHub用户名"  
 git config --global user.email "GitHub注册邮箱"  
 #生成ssh密匙  
@@ -26,8 +32,9 @@ cd ~/.ssh
 #将公钥添加到GitHub上
 ```
 
-- ### Hexo
-> ```
+Hexo
+---
+```
 npm install hexo-cli g  
 #初始化博客文件夹  
 hexo init blog  
@@ -46,8 +53,11 @@ npm install hexo-deployer-git --save
 npm install hexo-generator-sitemap --save  
 ```
 
-- ### 本地使用Hexo
-> ```
+3. 本地使用Hexo
+===
+本地Hexo操作
+---
+```
 #生成静态页面
 hexo generate
 #开启本地服务器
@@ -56,8 +66,10 @@ hexo s
 #如果端口占用可设置端口启动
 hexo s -p 8888
 ```
-- ### 部署到GitHub上
-> ```
+
+部署到GitHub上
+---
+```
 #修改根目录_config.
 # 参考官方文档:https://hexo.io/docs/deployment.html
 deploy:
@@ -74,13 +86,17 @@ hexo deploy
 #也可以合成一个命令
 hexo g -d
 ```
-- ### 配置域名
+
+配置域名
+---
 > 简短说:在GitHub仓库的Setting->GitHubPages->Custom domain
 配置你的域名  
 在你域名的操作页面配置dns为你的GitHub Pages的公网ip地址
 
-- ### 多终端使用
->push本地hexo中的必要文件到你的GitHub仓库中hexo分支上
+4.多终端使用
+===
+push本地hexo中的必要文件到你的GitHub仓库中hexo分支上
+---
 ```
 git init
 //添加需要的文件如node_modules,public就是不需要上传的文件,也可以git add .都传上去
@@ -94,8 +110,11 @@ git checkout hexo
 git remote add origin git@github.com:Wincher/WincherToldYou.git
 git push origin hexo
 ```
+
 GitHub仓库中新建了Hexo分支，用于多终端同步博客
+---
 其他终端clone和push更新
+---
 ```
 #另一终端更新博客，只要将Github的hexo分支clone下来，进行初次配置
 git clone -b hexo git@github.com:Wincher/WincherToldYou.git
