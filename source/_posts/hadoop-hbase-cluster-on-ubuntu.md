@@ -1,8 +1,10 @@
 ---
 title: Ubuntu搭建Hadoop&HBase集群
 date: 2018-01-19 13:23:21
-tags: hadoop
-categories: hadoop
+tags: ForRemember
+categories:
+    - Hadoop
+    - HBase
 ---
 
 1. 环境:
