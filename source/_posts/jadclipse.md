@@ -1,7 +1,8 @@
 ---
 title: jadclipse
-date: 2018-04-20 16:19:41
-tags: tools
+date: 2018-01-20 16:19:41
+tags: ForRemember
+categories: tools
 ---
 - [下载JadClipse](http://jadclipse.sourceforge.net/wiki/index.php/Main_Page#Download)，注意选择与eclipse版本一致的版本，我用的是Eclipse最新版，所以选择下载最新版net.sf.jadclipse_3.3.0.jar  
 - [下载Jad](http://www.varaneckas.com/jad)，下载相应版本jad158g.win.zip，下载后解压  
