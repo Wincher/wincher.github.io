@@ -40,7 +40,7 @@ yum -y rmeove docker-common.x86_64
 systemctl start docker
 docker info
 ```
-![pic](6.png)  
+![pic](6.jpeg)  
 ## 简单命令
 * docker ps -a查看全部容器(container)
 * docker images查看镜像文件(image)，你可以理解为image是一个类class，而container就是这个类的实体，可以建立很多个实体，实体之间是隔离的
