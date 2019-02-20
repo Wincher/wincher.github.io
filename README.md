@@ -11,10 +11,11 @@ npm install hexo-asset-image --save
 git pull
 git add .
 git commit -m ""
-git push orign hexo 
+git push orign hexo
 hexo g -d
 
 #other
 hexo init  
 hexo g
 hexo s  
+hexo new
