@@ -11,14 +11,16 @@ categories:
 Every time when install a new server, it really take some time to install these or those tools, i want to make this shit a auto way, and Ansible is born for that.
 
 ## Prepare
-What you should need to do for the server is just to install it, for me, ubuntu 18.04, and just make sure ssh works,  and then you can leave that server alone.
-
+What you should need to do for the server is just to install it, for me, ubuntu 18.04, and just make sure ssh works.
 ## install ansible
 pip install ansible
 
-##
+## ansible_python_interpreter
 touch /etc/ansible/hosts
 vim /etc/ansible/hosts
+
+`ssh-copy-id yourname@yourserver`
+
 ```
 [test]  # group name
 192.168.1.103   #remote server address
@@ -43,4 +45,6 @@ or maybe) you can link python3 to python on remote server (not recommended)
     "changed": false,
     "ping": "pong"
 }
-```  
+```
+cd yourpath , mkdir roles, cd roles
+ansible-galaxy init your-role-name
