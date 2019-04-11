@@ -69,7 +69,7 @@ remove branch
 `git diff HEAD HEAD^`  
 `git diff HEAD HEAD~1`  
 compare  staging and HEAD  
-`git diff --cache`  
+`git diff --cached`  
 compare work area and staging  
 `git diff`  
 `git diff -- file_name...`  
