@@ -89,11 +89,25 @@ there are 3 type (commit|tree|blog)
 happens when you checkout a commit without make it a branch, git will not persist any change without a branch  
 `git checkout commit_hash`
 
+
 ### git backup  
 local backup:  
 `git chone --bare /path/.git backup_repo.git`  
-`git chone --bare file:///path/.git backup_repo.git` backup_repo.git`  
-`git push --set-upstream backup_repo branch_name`
+`git chone --bare file:///path/.git backup_repo.git`  
+remote backup:  
+`git remote add remote_repo remote_git_url`  
+check remote repo:  
+`git remote -v`  
+push all local branch to remote_repo:  
+`git push remote_repo --all`  
+`git fetch remote_repo local_branch`  
+`git merge remote_repo`  
+`git merge  --allow-unrelated-histories remote_repo`  
+`git push remote_repo local_branch`  
+
+`git clone git_url new_dir_name`  
+
+`git push --set-upstream remote_repo branch_name`
 `git remote -v`  
 `git remote add name file:///path`  
 ### git GUI
