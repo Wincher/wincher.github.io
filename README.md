@@ -17,5 +17,6 @@
 ### other
 `hexo init`  
 `hexo g`
-`hexo s`  
-`hexo new`  
+`hexo s`
+create a new post:  
+`hexo new`

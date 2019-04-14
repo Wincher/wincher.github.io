@@ -107,7 +107,7 @@ push all local branch to remote_repo:
 
 `git clone git_url new_dir_name`  
 
-`git push --set-upstream remote_repo branch_name`
+`git push --set-upstream remote_repo branch_name`  
 `git remote -v`  
 `git remote add name file:///path`  
 ### git GUI
