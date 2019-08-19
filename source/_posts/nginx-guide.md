@@ -43,7 +43,7 @@ an objs dir is new during ./configure running
 `sudo ./sbin/nginx`
 now by default, you can visit nginx by server's 80 port  
 
-###
+### 
 
 ### Hot-Deploy  
 `cp nginx nginx.old`
