@@ -8,7 +8,7 @@ tags:
 ### Mac
 ```
 brew install fswatch
-
+rsync -avz username@remotehost:/remote/path/you/want/to/sync/ ./path/you/want/to/sync/
 vim watch.sh
 ```
 ```
