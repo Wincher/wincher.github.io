@@ -7,6 +7,9 @@
 ### plugin:generate relative path for image
 `npm install hexo-asset-image --save`
 
+git clone git@github.com:Wincher/Wincher.github.io.git
+git checkout hexo
+
 ### deploy operation
 `git pull`  
 `git add .`  
@@ -18,5 +21,6 @@
 `hexo init`  
 `hexo g`
 `hexo s`
-create a new post:  
+
+### create a new post:  
 `hexo new`

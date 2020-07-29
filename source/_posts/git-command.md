@@ -21,6 +21,7 @@ git config --system
 `git commit -am'your_comment'`  
 modify last commit info
 `git commit --amend`  
+`git commit --amend --author 'username <email>'`
 `git status`  
 `git log`
 ### git rename
