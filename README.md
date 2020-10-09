@@ -14,8 +14,8 @@ git checkout hexo
 `git pull`  
 `git add .`  
 `git commit -m'comment'`  
-`git push orign hexo`  
-`hexo g -d`  
+`git push orign hexo` this is used for backup posts in hexo branch 
+`hexo g -d` this is used for generate souce and push generated sources to master 
 
 ### other
 `hexo init`  
