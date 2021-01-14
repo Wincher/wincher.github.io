@@ -95,7 +95,7 @@ bootstrap产生log
 
 ![pic](030_opt.jpg)
 
-| 添加selector中我发现 protocol 和 ip:port 会拼接成我们的代理目标地址, 也就是说https**://** 这部分也是要手动写的,这是可以优化的点, 做成可选项的 schema, ip, 和port可选缺省 80, 这样可以更规范配置,另外如上图所示这样的写法也是可以正常被代理到 http://baidu.com的,接下来我会提交一个PR来优化
+| 添加selector中我发现 protocol 和 ip:port 会拼接成我们的代理目标地址, 也就是说https**://** 这部分也是要手动写的,这是可以优化的点, 做成可选项的 schema, ip, 和port可选缺省 80, 这样可以更规范配置,另外如上图所示这样的写法也是可以正常被代理到 http://baidu.com 的
 
 添加rule
 
