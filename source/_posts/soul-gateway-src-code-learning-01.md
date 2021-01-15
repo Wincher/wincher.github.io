@@ -1,7 +1,7 @@
 ---
 title: soul_gateway_src_code_learning_01
 date: 2021-01-15 00:07:03
-tags:
+tags: SOUL
 ---
 
 
@@ -95,7 +95,7 @@ bootstrap产生log
 
 ![pic](030_opt.jpg)
 
-| 添加selector中我发现 protocol 和 ip:port 会拼接成我们的代理目标地址, 也就是说https**://** 这部分也是要手动写的,这是可以优化的点, 做成可选项的 schema, ip, 和port可选缺省 80, 这样可以更规范配置,另外如上图所示这样的写法也是可以正常被代理到 http://baidu.com 的
+> 添加selector中我发现 protocol 和 ip:port 会拼接成我们的代理目标地址, 也就是说https**://** 这部分也是要手动写的,这是可以优化的点, 做成可选项的 schema, ip, 和port可选缺省 80, 这样可以更规范配置,另外如上图所示这样的写法也是可以正常被代理到 http://baidu.com 的
 
 添加rule
 
@@ -122,6 +122,6 @@ Server: bfe/1.0.8.18
 </html>
 ```
 
-可以看到我们访问方管 / path 已经得到重定向返回结果, 浏览器会重定向到https的百度
+可以看到我们访问刚配置好的根路径 / path 已经得到重定向返回结果, 浏览器会重定向到https的百度
 
 至此, 最基本的soul gateway已经跑起来了
