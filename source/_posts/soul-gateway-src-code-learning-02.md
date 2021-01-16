@@ -4,7 +4,7 @@ date: 2021-01-16 00:15:01
 tags: SOUL
 ---
 
-### SOUL divide plugin
+### SOUL divide plugin auto register
 
 上篇我们使用divide插件配置selector和rule成功将访问网关的请求转发到了baidu.com
 
@@ -76,6 +76,7 @@ soul:
 ```java
 @Override
     public Object postProcessAfterInitialization(@NonNull final Object bean, @NonNull final String beanName) throws BeansException {
+      // 如果配置了full, 则整个服务的所有接口都被代理, 不需要单独配置
         if (soulSpringMvcConfig.isFull()) {
             return bean;
         }
