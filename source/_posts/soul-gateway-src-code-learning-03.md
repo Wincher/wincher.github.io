@@ -47,4 +47,8 @@ soul:
 
 流程与divide完全一致
 
+同divide, 使用了 AlibabaDubboServiceBeanPostProcessor 去处理 拥有 @SoulDubboClient 注解的接口
+
+
+
 通过SoulWebHandler#execute遍历注插件后执行 AbstractSoulPlugin具体实现类的execute方法, 这里留个todo:接下来详细分析
