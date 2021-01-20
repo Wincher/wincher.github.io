@@ -36,9 +36,26 @@ content-length: 0
 
 只能得到空200响应, 这显然是不正确的
 
-TODO: check whty this happen, guess when no sofa plugin load, but sofa plugin turn on, the matched path will always return 200 with empty body.
+通过追踪 soul-web/src/main/java/org/dromara/soul/web/handler/SoulWebHandler.java 中静态内部类DefaultSoulPluginChain实现了 soul-plugin/soul-plugin-api/src/main/java/org/dromara/soul/plugin/api/SoulPluginChain.java 接口
 
-bootstrap添加
+```java
+public Mono<Void> execute(final ServerWebExchange exchange) {
+            return Mono.defer(() -> {
+                if (this.index < plugins.size()) {
+                    SoulPlugin plugin = plugins.get(this.index++);
+                    Boolean skip = plugin.skip(exchange);
+                    if (skip) {
+                        return this.execute(exchange);
+                    }
+                    return plugin.execute(exchange, this);
+                }
+//              由于需要命中的sofa plugin没有加载, 所以最后返回
+                return Mono.empty();
+            });
+        }
+```
+
+所以我们要做的就是在soul-bootstrap/pom.xml文件中添加
 
 ```xml
 <!-- sofa plugin start -->
