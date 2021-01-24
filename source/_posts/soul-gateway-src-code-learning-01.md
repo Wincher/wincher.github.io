@@ -9,7 +9,7 @@ tags: SOUL
 
 这是一个异步的,高性能的,跨语言的,响应式的API网关。我希望能够有一样东西像灵魂一样，保护您的微服务。参考了Kong，Spring-Cloud-Gateway等优秀的网关后，站在巨人的肩膀上，Soul由此诞生！
 
-# Features
+## Features
 
 - 支持各种语言(http协议)，支持 dubbo，springcloud协议。
 - 插件化设计思想，插件热插拔,易扩展。
@@ -21,8 +21,6 @@ tags: SOUL
 [官方文档](https://dromara.org/zh-cn/docs/soul/soul.html)
 
 [Github repo](https://github.com/dromara/soul)
-
-
 
 本人使用的是 master分支 b1ed3daa87a1633cc6c5cc131baa0cdd78df643c 版本, 未来可能会有略微不同
 
@@ -53,9 +51,9 @@ datasource:
     driver-class-name: com.mysql.jdbc.Driver
 ```
 
-在IDEA中运行 soul-admin 的入口函数 soul-admin/src/main/java/org/dromara/soul/admin/SoulAdminBootstrap.java 
+在IDEA中运行 soul-admin 的入口函数 soul-admin/src/main/java/org/dromara/soul/admin/SoulAdminBootstrap.java
 
-访问 http://127.0.0.1:9095 我们就看到首页了
+访问 <http://127.0.0.1:9095> 我们就看到首页了
 
 ![pic](00login.png)
 
@@ -69,25 +67,23 @@ datasource:
 
 注意这个log是soul-admin产生的,也就是soul-bootstrap启动后与admin建立了连接
 
-这个时候访问 http://localhost:9195/也就是soul-bootstrap会返回
+这个时候访问 <http://localhost:9195/> 也就是soul-bootstrap会返回
 
 ```json
 {
-	code: -107,
-	message: "Can not find selector, please check your configuration!",
-	data: null
+ code: -107,
+ message: "Can not find selector, please check your configuration!",
+ data: null
 }
 ```
 
 bootstrap产生log
 
-```
+```bash
 2021-01-15 00:20:00.542 ERROR 93827 --- [-work-threads-2] o.d.soul.plugin.base.utils.CheckUtils    : can not match selector data: divide
 ```
 
-
-
-根据提示我们打开divide页面, http://localhost:9095/#/plug/divide
+根据提示我们打开divide页面, <http://localhost:9095/#/plug/divide>
 
 添加selector
 
@@ -95,7 +91,7 @@ bootstrap产生log
 
 ![pic](030_opt.jpg)
 
-> 添加selector中我发现 protocol 和 ip:port 会拼接成我们的代理目标地址, 也就是说https**://** 这部分也是要手动写的,这是可以优化的点, 做成可选项的 schema, ip, 和port可选缺省 80, 这样可以更规范配置,另外如上图所示这样的写法也是可以正常被代理到 http://baidu.com 的
+> 添加selector中我发现 protocol 和 ip:port 会拼接成我们的代理目标地址, 也就是说https**://** 这部分也是要手动写的,这是可以优化的点, 做成可选项的 schema, ip, 和port可选缺省 80, 这样可以更规范配置,另外如上图所示这样的写法也是可以正常被代理到 <http://baidu.com> 的
 
 添加rule
 
