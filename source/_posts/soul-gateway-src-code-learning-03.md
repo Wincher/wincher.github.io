@@ -4,7 +4,7 @@ date: 2021-01-17 02:26:10
 tags: SOUL
 ---
 
-### SOUL dubbo demo
+### SOUL Dubbo demo
 
 使用dubbo插件, 访问 http://127.0.0.1:9095/#/system/plugin 可以看到 dubbo 插件默认是
 
