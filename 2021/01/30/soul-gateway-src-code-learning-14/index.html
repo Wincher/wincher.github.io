@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000" />
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top" />
+  
+  
+  <title>soul_gateway_src_code_learning_14 | WincherToldYou</title>
+  <meta name="description" content="SOUL: alibaba-dubbo apache-dubbo plugin 分析dubbo插件主要讲http 请求 转化为dubbo请求, 实现泛化调用 soul-plugin/soul-plugin-apache-dubbo/src/main/java/org/dromara/soul/plugin/apache/dubbo/ApacheDubboPlugin.java @Override">
+<meta name="keywords" content="SOUL">
+<meta property="og:type" content="article">
+<meta property="og:title" content="soul_gateway_src_code_learning_14">
+<meta property="og:url" content="http://wincher.cn/2021/01/30/soul-gateway-src-code-learning-14/index.html">
+<meta property="og:site_name" content="WincherToldYou">
+<meta property="og:description" content="SOUL: alibaba-dubbo apache-dubbo plugin 分析dubbo插件主要讲http 请求 转化为dubbo请求, 实现泛化调用 soul-plugin/soul-plugin-apache-dubbo/src/main/java/org/dromara/soul/plugin/apache/dubbo/ApacheDubboPlugin.java @Override">
+<meta property="og:updated_time" content="2021-01-29T19:01:49.241Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="soul_gateway_src_code_learning_14">
+<meta name="twitter:description" content="SOUL: alibaba-dubbo apache-dubbo plugin 分析dubbo插件主要讲http 请求 转化为dubbo请求, 实现泛化调用 soul-plugin/soul-plugin-apache-dubbo/src/main/java/org/dromara/soul/plugin/apache/dubbo/ApacheDubboPlugin.java @Override">
+  <!-- Canonical links -->
+  <link rel="canonical" href="http://wincher.cn/2021/01/30/soul-gateway-src-code-learning-14/index.html">
+  
+    <link rel="alternate" href="/atom.xml" title="WincherToldYou" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png" type="image/x-icon">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+  
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitment@0.0.3/style/default.min.css">
+  
+  
+  
+</head>
+
+
+<body class="main-center" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://github.com/Wincher" target="_blank">
+          <img class="img-circle img-rotate" src="/images/avatar.jpeg" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">Wincher</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">Software Engineer</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> Beijing, China</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="Search" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="Type something..." x-webkit-speech />
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav ">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">Home</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">Archives</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories">
+            
+            <i class="icon icon-folder"></i>
+            
+            <span class="menu-title">Categories</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags">
+            
+            <i class="icon icon-tags"></i>
+            
+            <span class="menu-title">Tags</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-repository">
+          <a href="/repository">
+            
+            <i class="icon icon-project"></i>
+            
+            <span class="menu-title">Repository</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-links">
+          <a href="/links">
+            
+            <i class="icon icon-friendship"></i>
+            
+            <span class="menu-title">Links</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about">
+            
+            <i class="icon icon-cup-fill"></i>
+            
+            <span class="menu-title">About</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/Wincher" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">Board</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+                <p>Welcome!</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Docker/">Docker</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/ForRemember/">ForRemember</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/HBase/">HBase</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hadoop/">Hadoop</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Hadoop/HBase/">HBase</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hive/">Hive</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/hadoop/">hadoop</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/">linux</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/operation/">operation</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/tools/">tools</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/感想/">感想</a><span class="category-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget-body">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Docker/">Docker</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ForRemember/">ForRemember</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HBase/">HBase</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hive/">Hive</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SOUL/">SOUL</a><span class="tag-list-count">16</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/environment/">environment</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/stuff/">stuff</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/感想/">感想</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget-body tagcloud">
+      <a href="/tags/Docker/" style="font-size: 13.33px;">Docker</a> <a href="/tags/ForRemember/" style="font-size: 13.67px;">ForRemember</a> <a href="/tags/HBase/" style="font-size: 13px;">HBase</a> <a href="/tags/Hive/" style="font-size: 13px;">Hive</a> <a href="/tags/SOUL/" style="font-size: 14px;">SOUL</a> <a href="/tags/environment/" style="font-size: 13px;">environment</a> <a href="/tags/linux/" style="font-size: 13px;">linux</a> <a href="/tags/stuff/" style="font-size: 13.33px;">stuff</a> <a href="/tags/感想/" style="font-size: 13px;">感想</a>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Archive</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/02/">February 2021</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">January 2021</a><span class="archive-list-count">15</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/10/">October 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">July 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">August 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">April 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">February 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a><span class="archive-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget-body">
+      <ul class="recent-post-list list-unstyled ">
+        
+          <li>
+            
+            <div class="item-thumb">
+              <a href="/2021/02/05/soul-gateway-src-code-learning-18/" class="thumb">
+    
+    
+        <span class="thumb-image thumb-none"></span>
+    
+</a>
+
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                
+              </p>
+              <p class="item-title">
+                <a href="/2021/02/05/soul-gateway-src-code-learning-18/" class="title">soul_gateway_src_code_learning_18</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2021-02-05T14:12:00.000Z" itemprop="datePublished">2021-02-05</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-thumb">
+              <a href="/2021/02/04/soul-gateway-src-code-learning-17/" class="thumb">
+    
+    
+        <span class="thumb-image thumb-none"></span>
+    
+</a>
+
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                
+              </p>
+              <p class="item-title">
+                <a href="/2021/02/04/soul-gateway-src-code-learning-17/" class="title">soul_gateway_src_code_learning_17</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2021-02-04T10:49:23.000Z" itemprop="datePublished">2021-02-04</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-thumb">
+              <a href="/2021/02/01/soul-gateway-src-code-learning-16/" class="thumb">
+    
+    
+        <span class="thumb-image thumb-none"></span>
+    
+</a>
+
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                
+              </p>
+              <p class="item-title">
+                <a href="/2021/02/01/soul-gateway-src-code-learning-16/" class="title">soul_gateway_src_code_learning_16</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2021-02-01T15:50:07.000Z" itemprop="datePublished">2021-02-01</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-thumb">
+              <a href="/2021/01/30/soul-gateway-src-code-learning-15/" class="thumb">
+    
+    
+        <span class="thumb-image thumb-none"></span>
+    
+</a>
+
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                
+              </p>
+              <p class="item-title">
+                <a href="/2021/01/30/soul-gateway-src-code-learning-15/" class="title">soul_gateway_src_code_learning_15</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2021-01-30T12:21:31.000Z" itemprop="datePublished">2021-01-30</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-thumb">
+              <a href="/2021/01/30/soul-gateway-src-code-learning-14/" class="thumb">
+    
+    
+        <span class="thumb-image thumb-none"></span>
+    
+</a>
+
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                
+              </p>
+              <p class="item-title">
+                <a href="/2021/01/30/soul-gateway-src-code-learning-14/" class="title">soul_gateway_src_code_learning_14</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2021-01-29T18:36:35.000Z" itemprop="datePublished">2021-01-30</time>
+              </p>
+            </div>
+          </li>
+          
+      </ul>
+    </div>
+  </div>
+  
+
+    
+  </div>
+</aside>
+
+  
+  
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-soul-gateway-src-code-learning-14" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      soul_gateway_src_code_learning_14
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2021/01/30/soul-gateway-src-code-learning-14/" class="article-date">
+	  <time datetime="2021-01-29T18:36:35.000Z" itemprop="datePublished">2021-01-30</time>
+	</a>
+</span>
+        
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link" href="/tags/SOUL/">SOUL</a>
+  </span>
+
+
+        
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2021/01/30/soul-gateway-src-code-learning-14/#comments" class="article-comment-link">Comments</a></span>
+        
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <h3 id="SOUL-alibaba-dubbo-apache-dubbo-plugin-分析"><a href="#SOUL-alibaba-dubbo-apache-dubbo-plugin-分析" class="headerlink" title="SOUL: alibaba-dubbo apache-dubbo plugin 分析"></a>SOUL: alibaba-dubbo apache-dubbo plugin 分析</h3><p>dubbo插件主要讲http 请求 转化为dubbo请求, 实现泛化调用 soul-plugin/soul-plugin-apache-dubbo/src/main/java/org/dromara/soul/plugin/apache/dubbo/ApacheDubboPlugin.java</p>
+<pre><code class="java">@Override
+    protected Mono&lt;Void&gt; doExecute(final ServerWebExchange exchange, final SoulPluginChain chain, final SelectorData selector, final RuleData rule) {
+        String body = exchange.getAttribute(Constants.DUBBO_PARAMS);
+        SoulContext soulContext = exchange.getAttribute(Constants.CONTEXT);
+        assert soulContext != null;
+      //  可以看到与divide插件, SpringCLoud插件的区别是这里用到了Metadata
+        MetaData metaData = exchange.getAttribute(Constants.META_DATA);
+        if (!checkMetaData(metaData)) {
+            assert metaData != null;
+            log.error(&quot; path is :{}, meta data have error.... {}&quot;, soulContext.getPath(), metaData.toString());
+            exchange.getResponse().setStatusCode(HttpStatus.INTERNAL_SERVER_ERROR);
+            Object error = SoulResultWrap.error(SoulResultEnum.META_DATA_ERROR.getCode(), SoulResultEnum.META_DATA_ERROR.getMsg(), null);
+            return WebFluxResultUtils.result(exchange, error);
+        }
+        if (StringUtils.isNoneBlank(metaData.getParameterTypes()) &amp;&amp; StringUtils.isBlank(body)) {
+            exchange.getResponse().setStatusCode(HttpStatus.INTERNAL_SERVER_ERROR);
+            Object error = SoulResultWrap.error(SoulResultEnum.DUBBO_HAVE_BODY_PARAM.getCode(), SoulResultEnum.DUBBO_HAVE_BODY_PARAM.getMsg(), null);
+            return WebFluxResultUtils.result(exchange, error);
+        }
+      //进行泛化调用
+        final Mono&lt;Object&gt; result = dubboProxyService.genericInvoker(body, metaData, exchange);
+        return result.then(chain.execute(exchange));
+    }
+</code></pre>
+<p>soul-plugin/soul-plugin-alibaba-dubbo/src/main/java/org/dromara/soul/plugin/alibaba/dubbo/AlibabaDubboPlugin.java 和ApacheDubboPlugin的逻辑基本一致, 只是下面部分有一点差别</p>
+<pre><code class="java">......
+  //进行泛化调用
+        Object result = alibabaDubboProxyService.genericInvoker(body, metaData);
+//将结果放到 exchange中
+        if (Objects.nonNull(result)) {
+            exchange.getAttributes().put(Constants.DUBBO_RPC_RESULT, result);
+        } else {
+            exchange.getAttributes().put(Constants.DUBBO_RPC_RESULT, Constants.DUBBO_RPC_RESULT_EMPTY);
+        }
+        exchange.getAttributes().put(Constants.CLIENT_RESPONSE_RESULT_TYPE, ResultEnum.SUCCESS.getName());
+        return chain.execute(exchange);
+    }
+</code></pre>
+<pre><code class="java">public Mono&lt;Object&gt; genericInvoker(final String body, final MetaData metaData, final ServerWebExchange exchange) throws SoulException {
+        // issue(https://github.com/dromara/soul/issues/471), add dubbo tag route
+        String dubboTagRouteFromHttpHeaders = exchange.getRequest().getHeaders().getFirst(Constants.DUBBO_TAG_ROUTE);
+        if (StringUtils.isNotBlank(dubboTagRouteFromHttpHeaders)) {
+            RpcContext.getContext().setAttachment(CommonConstants.TAG_KEY, dubboTagRouteFromHttpHeaders);
+        }
+        ReferenceConfig&lt;GenericService&gt; reference = ApplicationConfigCache.getInstance().get(metaData.getPath());
+        if (Objects.isNull(reference) || StringUtils.isEmpty(reference.getInterface())) {
+            ApplicationConfigCache.getInstance().invalidate(metaData.getPath());
+            reference = ApplicationConfigCache.getInstance().initRef(metaData);
+        }
+        GenericService genericService = reference.get();
+        Pair&lt;String[], Object[]&gt; pair;
+        if (ParamCheckUtils.dubboBodyIsEmpty(body)) {
+            pair = new ImmutablePair&lt;&gt;(new String[]{}, new Object[]{});
+        } else {
+            pair = dubboParamResolveService.buildParameter(body, metaData.getParameterTypes());
+        }
+        CompletableFuture&lt;Object&gt; future = genericService.$invokeAsync(metaData.getMethodName(), pair.getLeft(), pair.getRight());
+        return Mono.fromFuture(future.thenApply(ret -&gt; {
+            if (Objects.isNull(ret)) {
+                ret = Constants.DUBBO_RPC_RESULT_EMPTY;
+            }
+            exchange.getAttributes().put(Constants.DUBBO_RPC_RESULT, ret);
+            exchange.getAttributes().put(Constants.CLIENT_RESPONSE_RESULT_TYPE, ResultEnum.SUCCESS.getName());
+            return ret;
+        })).onErrorMap(exception -&gt; exception instanceof GenericException ? new SoulException(((GenericException) exception).getExceptionMessage()) : new SoulException(exception));
+    }
+}
+</code></pre>
+<p>soul-common/src/main/java/org/dromara/soul/common/dto/MetaData.java</p>
+<pre><code class="java">@Data
+@ToString
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+public class MetaData implements Serializable {
+    private String id;
+    private String appName;
+    private String contextPath;
+    private String path;
+    private String rpcType;
+    private String serviceName;
+    private String methodName;
+    private String parameterTypes;
+    private String rpcExt;
+    private Boolean enabled;
+}
+</code></pre>
+<p>Medata中保存了dubbo接口的信息</p>
+<ul>
+<li>每一个dubbo接口方法，都会有一条metadata与之对应，可以在 soul-admin –&gt; Metadata中查看</li>
+</ul>
+<ul>
+<li>path: 即http路径</li>
+<li>rpc扩展参数，对应为dubbo接口的一些配置，调整的化，请在这里修改，支持json格式，以下字段：</li>
+</ul>
+<pre><code class="json">{&quot;timeout&quot;:10000,&quot;group&quot;:&quot;&quot;,version&quot;:&quot;&quot;,&quot;loadbalance&quot;:&quot;&quot;,&quot;retries&quot;:1}
+</code></pre>
+<p>在soul-plugin/soul-plugin-apache-dubbo/src/main/java/org/dromara/soul/plugin/apache/dubbo/response/DubboResponsePlugin.java中返回result, alibaba-dubbo中的DubboResponsePlugin.java 同理</p>
+<pre><code class="java">@Override
+public Mono&lt;Void&gt; execute(final ServerWebExchange exchange, final SoulPluginChain chain) {
+    return chain.execute(exchange).then(Mono.defer(() -&gt; {
+        final Object result = exchange.getAttribute(Constants.DUBBO_RPC_RESULT);
+        if (Objects.isNull(result)) {
+            Object error = SoulResultWrap.error(SoulResultEnum.SERVICE_RESULT_ERROR.getCode(), SoulResultEnum.SERVICE_RESULT_ERROR.getMsg(), null);
+            return WebFluxResultUtils.result(exchange, error);
+        }
+        Object success = SoulResultWrap.success(SoulResultEnum.SUCCESS.getCode(), SoulResultEnum.SUCCESS.getMsg(), JsonUtils.removeClass(result));
+        return WebFluxResultUtils.result(exchange, success);
+    }));
+}
+</code></pre>
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="http://wincher.cn/2021/01/30/soul-gateway-src-code-learning-14/" title="soul_gateway_src_code_learning_14" target="_blank" rel="external">http://wincher.cn/2021/01/30/soul-gateway-src-code-learning-14/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/Wincher" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/avatar.jpeg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/Wincher" target="_blank"><span class="text-dark">Wincher</span><small class="ml-1x">Software Engineer</small></a></h3>
+        <div>Mainly using Java</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    <li class="prev">
+      <a href="/2021/01/30/soul-gateway-src-code-learning-15/" title="soul_gateway_src_code_learning_15"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;Newer</span></a>
+    </li>
+    
+    
+    <li class="next">
+      <a href="/2021/01/28/soul-gateway-src-code-learning-13/" title="soul_gateway_src_code_learning_13"><span>Older&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+  </ul>
+  
+  
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-fancy btn-donate pop-onhover bg-gradient-warning" data-toggle="modal" data-target="#donateModal"><span>$</span></button>
+  <!-- <div class="wave-icon wave-icon-danger btn-donate" data-toggle="modal" data-target="#donateModal">
+    <div class="wave-circle"><span class="icon"><i class="icon icon-bill"></i></span></div>
+  </div> -->
+  
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="weibo,qq,wechat,facebook,twitter" data-mobile-sites="weibo,qq,qzone"></div>
+    
+  </div>
+  </div>
+</nav>
+  
+<!-- Modal -->
+<div class="modal modal-center modal-small modal-xs-full fade" id="donateModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content donate">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <div class="modal-body">
+        <div class="donate-box">
+          <div class="donate-head">
+            <p>Maybe you could buy me a cup of coffee.</p>
+          </div>
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade active in" id="alipay">
+              <div class="donate-payimg">
+                <img src="/images/avatar.jpeg" alt="Scan Qrcode" title="Scan" />
+              </div>
+              <p class="text-muted mv">Scan this qrcode</p>
+              <p class="text-grey">Open alipay app scan this qrcode, buy me a coffee!</p>
+            </div>
+            <div role="tabpanel" class="tab-pane fade" id="wechatpay">
+              <div class="donate-payimg">
+                <img src="/images/avatar.jpeg" alt="Scan Qrcode" title="Scan" />
+              </div>
+              <p class="text-muted mv">Scan this qrcode</p>
+              <p class="text-grey">Open wechat app scan this qrcode, buy me a coffee!</p>
+            </div>
+          </div>
+          <div class="donate-footer">
+            <ul class="nav nav-tabs nav-justified" role="tablist">
+              <li role="presentation" class="active">
+                <a href="#alipay" id="alipay-tab" role="tab" data-toggle="tab" aria-controls="alipay" aria-expanded="true"><i class="icon icon-alipay"></i> alipay</a>
+              </li>
+              <li role="presentation" class="">
+                <a href="#wechatpay" role="tab" id="wechatpay-tab" data-toggle="tab" aria-controls="wechatpay" aria-expanded="false"><i class="icon icon-wepay"></i> wechat payment</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/Wincher" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    <div class="copyright">
+    	
+        <div class="publishby">
+        	Theme by <a href="https://github.com/cofess" target="_blank"> cofess </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>.
+        </div>
+    </div>
+</footer>
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+<script src="/js/plugin.min.js"></script>
+<script src="/js/application.js"></script>
+
+    <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+
+
+
+
+   
+
+
+
+
+   
+    
+<script src="//cdn.jsdelivr.net/npm/gitment@0.0.3/dist/gitment.browser.min.js"></script>
+<script>
+var gitment = new Gitment({
+  // id默认为当前页面url，如果url后带参数或锚点，gitment要重新初始化
+  // https://github.com/imsun/gitment/issues/55
+  // 解决方案：id:window.location.pathname,或者将id设置为当前页面标题
+  id: 'soul_gateway_src_code_learning_14', 
+  owner: '', // 可以是你的GitHub用户名，也可以是github id
+  repo: '',
+  oauth: {
+    client_id: '',
+    client_secret: '',
+  }
+})
+gitment.render('comments')
+</script>
+
+
+
+
+
+
+
+
+
+</body>
+</html>

@@ -1,27 +1,711 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="UTF-8" />
-  <title>WincherToldYou</title>
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <link rel="stylesheet" href="https://unpkg.com/ionicons@2.0.1/css/ionicons.min.css">
-  <link rel="stylesheet" href="https://unpkg.com/milligram@1.3.0/dist/milligram.min.css">
-  <link href="https://fonts.googleapis.com/css?family=Comfortaa" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro" rel="stylesheet">
-  <link rel="stylesheet" href="https://unpkg.com/animate.css@3.5.2/animate.min.css">
-  <link rel="stylesheet" href="https://unpkg.com/nprogress@0.2.0/nprogress.css">
-  <link rel="stylesheet" href="https://unpkg.com/loaders.css@0.1.2/loaders.min.css">
-  <link rel="stylesheet" href="https://unpkg.com/highlight.js@9.11.0/styles/atom-one-light.css">
-  <link rel="stylesheet" href="/css/app.css">
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000" />
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top" />
+  
+  
+  <title>soul_gateway_src_code_learning_10 | WincherToldYou</title>
+  <meta name="description" content="SOUL admin/bootstrap cluster 模拟soul 网关集群部署, 启动2个admin, 2个bootstrap  如上开启配置可以启动多个实例,也可以打包后通过java -jar启动 在soul-bootstrap的application.yml配置刚才启动的soul-admin的 url soul:     sync:         websocket :">
+<meta name="keywords" content="SOUL">
+<meta property="og:type" content="article">
+<meta property="og:title" content="soul_gateway_src_code_learning_10">
+<meta property="og:url" content="http://wincher.cn/2021/01/26/soul-gateway-src-code-learning-10/index.html">
+<meta property="og:site_name" content="WincherToldYou">
+<meta property="og:description" content="SOUL admin/bootstrap cluster 模拟soul 网关集群部署, 启动2个admin, 2个bootstrap  如上开启配置可以启动多个实例,也可以打包后通过java -jar启动 在soul-bootstrap的application.yml配置刚才启动的soul-admin的 url soul:     sync:         websocket :">
+<meta property="og:image" content="http://wincher.cn/2021/01/26/soul-gateway-src-code-learning-10/00parallel_run.jpg">
+<meta property="og:image" content="http://wincher.cn/2021/01/26/soul-gateway-src-code-learning-10/01no_data_admins.png">
+<meta property="og:image" content="http://wincher.cn/2021/01/26/soul-gateway-src-code-learning-10/02diff_admin_selector.jpg">
+<meta property="og:updated_time" content="2021-01-25T18:14:59.204Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="soul_gateway_src_code_learning_10">
+<meta name="twitter:description" content="SOUL admin/bootstrap cluster 模拟soul 网关集群部署, 启动2个admin, 2个bootstrap  如上开启配置可以启动多个实例,也可以打包后通过java -jar启动 在soul-bootstrap的application.yml配置刚才启动的soul-admin的 url soul:     sync:         websocket :">
+<meta name="twitter:image" content="http://wincher.cn/2021/01/26/soul-gateway-src-code-learning-10/00parallel_run.jpg">
+  <!-- Canonical links -->
+  <link rel="canonical" href="http://wincher.cn/2021/01/26/soul-gateway-src-code-learning-10/index.html">
+  
+    <link rel="alternate" href="/atom.xml" title="WincherToldYou" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png" type="image/x-icon">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+  
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitment@0.0.3/style/default.min.css">
+  
+  
+  
 </head>
-<body>
-  <div id="app"></div>
-  <script type="text/javascript">
-    window.root = "/"
-  </script>
-  <script src="/js/manifest.js"></script>
-  <script src="/js/vendor.js"></script>
-  <script src="/js/app.js"></script>
+
+
+<body class="main-center" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://github.com/Wincher" target="_blank">
+          <img class="img-circle img-rotate" src="/images/avatar.jpeg" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">Wincher</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">Software Engineer</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> Beijing, China</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="Search" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="Type something..." x-webkit-speech />
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav ">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">Home</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">Archives</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories">
+            
+            <i class="icon icon-folder"></i>
+            
+            <span class="menu-title">Categories</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags">
+            
+            <i class="icon icon-tags"></i>
+            
+            <span class="menu-title">Tags</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-repository">
+          <a href="/repository">
+            
+            <i class="icon icon-project"></i>
+            
+            <span class="menu-title">Repository</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-links">
+          <a href="/links">
+            
+            <i class="icon icon-friendship"></i>
+            
+            <span class="menu-title">Links</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about">
+            
+            <i class="icon icon-cup-fill"></i>
+            
+            <span class="menu-title">About</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/Wincher" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">Board</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+                <p>Welcome!</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Docker/">Docker</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/ForRemember/">ForRemember</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/HBase/">HBase</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hadoop/">Hadoop</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Hadoop/HBase/">HBase</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hive/">Hive</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/hadoop/">hadoop</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/">linux</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/operation/">operation</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/tools/">tools</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/感想/">感想</a><span class="category-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget-body">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Docker/">Docker</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ForRemember/">ForRemember</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HBase/">HBase</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hive/">Hive</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SOUL/">SOUL</a><span class="tag-list-count">16</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/environment/">environment</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/stuff/">stuff</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/感想/">感想</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget-body tagcloud">
+      <a href="/tags/Docker/" style="font-size: 13.33px;">Docker</a> <a href="/tags/ForRemember/" style="font-size: 13.67px;">ForRemember</a> <a href="/tags/HBase/" style="font-size: 13px;">HBase</a> <a href="/tags/Hive/" style="font-size: 13px;">Hive</a> <a href="/tags/SOUL/" style="font-size: 14px;">SOUL</a> <a href="/tags/environment/" style="font-size: 13px;">environment</a> <a href="/tags/linux/" style="font-size: 13px;">linux</a> <a href="/tags/stuff/" style="font-size: 13.33px;">stuff</a> <a href="/tags/感想/" style="font-size: 13px;">感想</a>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Archive</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/02/">February 2021</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">January 2021</a><span class="archive-list-count">15</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/10/">October 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">July 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">August 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">April 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">February 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a><span class="archive-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget-body">
+      <ul class="recent-post-list list-unstyled ">
+        
+          <li>
+            
+            <div class="item-thumb">
+              <a href="/2021/02/05/soul-gateway-src-code-learning-18/" class="thumb">
+    
+    
+        <span class="thumb-image thumb-none"></span>
+    
+</a>
+
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                
+              </p>
+              <p class="item-title">
+                <a href="/2021/02/05/soul-gateway-src-code-learning-18/" class="title">soul_gateway_src_code_learning_18</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2021-02-05T14:12:00.000Z" itemprop="datePublished">2021-02-05</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-thumb">
+              <a href="/2021/02/04/soul-gateway-src-code-learning-17/" class="thumb">
+    
+    
+        <span class="thumb-image thumb-none"></span>
+    
+</a>
+
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                
+              </p>
+              <p class="item-title">
+                <a href="/2021/02/04/soul-gateway-src-code-learning-17/" class="title">soul_gateway_src_code_learning_17</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2021-02-04T10:49:23.000Z" itemprop="datePublished">2021-02-04</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-thumb">
+              <a href="/2021/02/01/soul-gateway-src-code-learning-16/" class="thumb">
+    
+    
+        <span class="thumb-image thumb-none"></span>
+    
+</a>
+
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                
+              </p>
+              <p class="item-title">
+                <a href="/2021/02/01/soul-gateway-src-code-learning-16/" class="title">soul_gateway_src_code_learning_16</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2021-02-01T15:50:07.000Z" itemprop="datePublished">2021-02-01</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-thumb">
+              <a href="/2021/01/30/soul-gateway-src-code-learning-15/" class="thumb">
+    
+    
+        <span class="thumb-image thumb-none"></span>
+    
+</a>
+
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                
+              </p>
+              <p class="item-title">
+                <a href="/2021/01/30/soul-gateway-src-code-learning-15/" class="title">soul_gateway_src_code_learning_15</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2021-01-30T12:21:31.000Z" itemprop="datePublished">2021-01-30</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-thumb">
+              <a href="/2021/01/30/soul-gateway-src-code-learning-14/" class="thumb">
+    
+    
+        <span class="thumb-image thumb-none"></span>
+    
+</a>
+
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                
+              </p>
+              <p class="item-title">
+                <a href="/2021/01/30/soul-gateway-src-code-learning-14/" class="title">soul_gateway_src_code_learning_14</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2021-01-29T18:36:35.000Z" itemprop="datePublished">2021-01-30</time>
+              </p>
+            </div>
+          </li>
+          
+      </ul>
+    </div>
+  </div>
+  
+
+    
+  </div>
+</aside>
+
+  
+  
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-soul-gateway-src-code-learning-10" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      soul_gateway_src_code_learning_10
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2021/01/26/soul-gateway-src-code-learning-10/" class="article-date">
+	  <time datetime="2021-01-25T16:31:42.000Z" itemprop="datePublished">2021-01-26</time>
+	</a>
+</span>
+        
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link" href="/tags/SOUL/">SOUL</a>
+  </span>
+
+
+        
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2021/01/26/soul-gateway-src-code-learning-10/#comments" class="article-comment-link">Comments</a></span>
+        
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <p>SOUL admin/bootstrap cluster</p>
+<p>模拟soul 网关集群部署, 启动2个admin, 2个bootstrap</p>
+<p><img src="/2021/01/26/soul-gateway-src-code-learning-10/00parallel_run.jpg" alt="img"></p>
+<p>如上开启配置可以启动多个实例,也可以打包后通过java -jar启动</p>
+<p>在<code>soul-bootstrap</code>的<code>application.yml</code>配置刚才启动的<code>soul-admin</code>的 url</p>
+<pre><code class="yaml">soul:
+    sync:
+        websocket :
+             urls: ws://localhost:9095/websocket,ws://localhost:9096/websocket
+</code></pre>
+<p>启动后分别打开 <a href="http://localhost:9095/#/plug/divide" target="_blank" rel="external">http://localhost:9095/#/plug/divide</a>, <a href="http://localhost:9096/#/plug/divide" target="_blank" rel="external">http://localhost:9096/#/plug/divide</a>,可以看到目前都没有数据</p>
+<p><img src="/2021/01/26/soul-gateway-src-code-learning-10/01no_data_admins.png" alt="img"></p>
+<p>启动一个soul-examples-http, 具体可参考前面的文章</p>
+<pre><code class="bash">$curl 127.0.0.1:9195/http/order/findById\?id=1
+{&quot;id&quot;:&quot;1&quot;,&quot;name&quot;:&quot;hello world findById&quot;}%
+$curl 127.0.0.1:9196/http/order/findById\?id=1
+{&quot;id&quot;:&quot;1&quot;,&quot;name&quot;:&quot;hello world findById&quot;}%
+</code></pre>
+<p>这时候, 我们看到9195, 9196都可以访问代理到,实际上我们只是因为刚启动的配置注册到了admin:9196, 而后被同步到了配置了两个admin的websocket同步的9195和9196 bootstrap, 那么我好奇的是如果这个时候在启动一个example, 修改接口路径, 同步到9096,那么我们bootstrap得到的是合集还是会被覆盖呢, 接下来操作</p>
+<p>修改 soul-examples/soul-examples-http/src/main/resources/application.yml</p>
+<pre><code class="yaml">server:
+  port: 8189
+  address: 0.0.0.0
+soul:
+  http:
+    adminUrl: http://localhost:9096
+</code></pre>
+<p>soul-examples/soul-examples-http/src/main/java/org/dromara/soul/examples/http/controller/HttpTestController.java</p>
+<p>将路径改为</p>
+<pre><code class="java">@GetMapping(&quot;/findById&quot;)
+@SoulSpringMvcClient(path = &quot;/9016FindById&quot;, desc = &quot;Find by id&quot;)
+public OrderDTO findById(@RequestParam(&quot;id&quot;) final String id) {}
+</code></pre>
+<p>启动后做下</p>
+<p><img src="/2021/01/26/soul-gateway-src-code-learning-10/02diff_admin_selector.jpg" alt="img"></p>
+<p>可以看到 8188 和 8189 examples-http分别注册到了 9095和9096admin, 接下来测试下</p>
+<pre><code class="bash">$url 127.0.0.1:9196/http/order/findById\?id=1
+{&quot;id&quot;:&quot;1&quot;,&quot;name&quot;:&quot;hello world findById&quot;}%
+$curl 127.0.0.1:9195/http/order/findById\?id=1
+{&quot;id&quot;:&quot;1&quot;,&quot;name&quot;:&quot;hello world findById&quot;}%
+$curl 127.0.0.1:9195/http/order/9016FindById\?id=1
+{&quot;code&quot;:-102,&quot;message&quot;:&quot;Rule not found!&quot;,&quot;data&quot;:null}%
+$curl 127.0.0.1:9196/http/order/9016FindById\?id=1
+{&quot;code&quot;:-102,&quot;message&quot;:&quot;Rule not found!&quot;,&quot;data&quot;:null}%
+</code></pre>
+<p>可以看到, 我们新启动的8189 examples-http并没有对任意一个bootstrap生效, 可以猜测只有第一个配置的url生效了</p>
+<p>而实际上我们看到 soul-sync-data-center/soul-sync-data-websocket/src/main/java/org/dromara/soul/plugin/sync/data/websocket/WebsocketSyncDataService.java</p>
+<pre><code class="java">for (String url : urls) {
+            try {
+                clients.add(new SoulWebsocketClient(new URI(url), Objects.requireNonNull(pluginDataSubscriber), metaDataSubscribers, authDataSubscribers));
+            } catch (URISyntaxException e) {
+                log.error(&quot;websocket url({}) is error&quot;, url, e);
+            }
+        }
+        try {
+            for (WebSocketClient client : clients) {
+                boolean success = client.connectBlocking(3000, TimeUnit.MILLISECONDS);
+                if (success) {
+                    log.info(&quot;websocket connection is successful.....&quot;);
+                } else {
+                    log.error(&quot;websocket connection is error.....&quot;);
+                }
+                executor.scheduleAtFixedRate(() -&gt; {
+                    try {
+                        if (client.isClosed()) {
+                            boolean reconnectSuccess = client.reconnectBlocking();
+                            if (reconnectSuccess) {
+                                log.info(&quot;websocket reconnect is successful.....&quot;);
+                            } else {
+                                log.error(&quot;websocket reconnection is error.....&quot;);
+                            }
+                        }
+                    } catch (InterruptedException e) {
+                        log.error(&quot;websocket connect is error :{}&quot;, e.getMessage());
+                    }
+                }, 10, 30, TimeUnit.SECONDS);
+            }
+</code></pre>
+<p>明显所有的client都会同步数据,  这里留下一个TODO:看看为什么会产生这种现象</p>
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="http://wincher.cn/2021/01/26/soul-gateway-src-code-learning-10/" title="soul_gateway_src_code_learning_10" target="_blank" rel="external">http://wincher.cn/2021/01/26/soul-gateway-src-code-learning-10/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/Wincher" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/avatar.jpeg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/Wincher" target="_blank"><span class="text-dark">Wincher</span><small class="ml-1x">Software Engineer</small></a></h3>
+        <div>Mainly using Java</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    <li class="prev">
+      <a href="/2021/01/26/soul-gateway-src-code-learning-11/" title="soul_gateway_src_code_learning_11"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;Newer</span></a>
+    </li>
+    
+    
+    <li class="next">
+      <a href="/2021/01/23/soul-gateway-src-code-learning-09/" title="soul_gateway_src_code_learning_09"><span>Older&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+  </ul>
+  
+  
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-fancy btn-donate pop-onhover bg-gradient-warning" data-toggle="modal" data-target="#donateModal"><span>$</span></button>
+  <!-- <div class="wave-icon wave-icon-danger btn-donate" data-toggle="modal" data-target="#donateModal">
+    <div class="wave-circle"><span class="icon"><i class="icon icon-bill"></i></span></div>
+  </div> -->
+  
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="weibo,qq,wechat,facebook,twitter" data-mobile-sites="weibo,qq,qzone"></div>
+    
+  </div>
+  </div>
+</nav>
+  
+<!-- Modal -->
+<div class="modal modal-center modal-small modal-xs-full fade" id="donateModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content donate">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <div class="modal-body">
+        <div class="donate-box">
+          <div class="donate-head">
+            <p>Maybe you could buy me a cup of coffee.</p>
+          </div>
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade active in" id="alipay">
+              <div class="donate-payimg">
+                <img src="/images/avatar.jpeg" alt="Scan Qrcode" title="Scan" />
+              </div>
+              <p class="text-muted mv">Scan this qrcode</p>
+              <p class="text-grey">Open alipay app scan this qrcode, buy me a coffee!</p>
+            </div>
+            <div role="tabpanel" class="tab-pane fade" id="wechatpay">
+              <div class="donate-payimg">
+                <img src="/images/avatar.jpeg" alt="Scan Qrcode" title="Scan" />
+              </div>
+              <p class="text-muted mv">Scan this qrcode</p>
+              <p class="text-grey">Open wechat app scan this qrcode, buy me a coffee!</p>
+            </div>
+          </div>
+          <div class="donate-footer">
+            <ul class="nav nav-tabs nav-justified" role="tablist">
+              <li role="presentation" class="active">
+                <a href="#alipay" id="alipay-tab" role="tab" data-toggle="tab" aria-controls="alipay" aria-expanded="true"><i class="icon icon-alipay"></i> alipay</a>
+              </li>
+              <li role="presentation" class="">
+                <a href="#wechatpay" role="tab" id="wechatpay-tab" data-toggle="tab" aria-controls="wechatpay" aria-expanded="false"><i class="icon icon-wepay"></i> wechat payment</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/Wincher" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    <div class="copyright">
+    	
+        <div class="publishby">
+        	Theme by <a href="https://github.com/cofess" target="_blank"> cofess </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>.
+        </div>
+    </div>
+</footer>
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+<script src="/js/plugin.min.js"></script>
+<script src="/js/application.js"></script>
+
+    <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+
+
+
+
+   
+
+
+
+
+   
+    
+<script src="//cdn.jsdelivr.net/npm/gitment@0.0.3/dist/gitment.browser.min.js"></script>
+<script>
+var gitment = new Gitment({
+  // id默认为当前页面url，如果url后带参数或锚点，gitment要重新初始化
+  // https://github.com/imsun/gitment/issues/55
+  // 解决方案：id:window.location.pathname,或者将id设置为当前页面标题
+  id: 'soul_gateway_src_code_learning_10', 
+  owner: '', // 可以是你的GitHub用户名，也可以是github id
+  repo: '',
+  oauth: {
+    client_id: '',
+    client_secret: '',
+  }
+})
+gitment.render('comments')
+</script>
+
+
+
+
+
+
+
+
+
 </body>
 </html>

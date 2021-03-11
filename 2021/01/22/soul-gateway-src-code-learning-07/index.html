@@ -1,27 +1,820 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="UTF-8" />
-  <title>WincherToldYou</title>
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <link rel="stylesheet" href="https://unpkg.com/ionicons@2.0.1/css/ionicons.min.css">
-  <link rel="stylesheet" href="https://unpkg.com/milligram@1.3.0/dist/milligram.min.css">
-  <link href="https://fonts.googleapis.com/css?family=Comfortaa" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro" rel="stylesheet">
-  <link rel="stylesheet" href="https://unpkg.com/animate.css@3.5.2/animate.min.css">
-  <link rel="stylesheet" href="https://unpkg.com/nprogress@0.2.0/nprogress.css">
-  <link rel="stylesheet" href="https://unpkg.com/loaders.css@0.1.2/loaders.min.css">
-  <link rel="stylesheet" href="https://unpkg.com/highlight.js@9.11.0/styles/atom-one-light.css">
-  <link rel="stylesheet" href="/css/app.css">
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000" />
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top" />
+  
+  
+  <title>soul_gateway_src_code_learning_07 | WincherToldYou</title>
+  <meta name="description" content="SOUL Admin &amp;amp; 网关 Zookeeper 数据同步 目前SOUL提供了这几种数据同步方式, 上一节我们使用了WebSocket, 这一节使用Zookeerper来做数据同步, 代码实现结构与WebSocket如出一辙, 只不过具体的同步过程使用了Zookeeper自身的特性 启动 zk,我用的docker docker run -p 2181:2181 --restart unl">
+<meta property="og:type" content="article">
+<meta property="og:title" content="soul_gateway_src_code_learning_07">
+<meta property="og:url" content="http://wincher.cn/2021/01/22/soul-gateway-src-code-learning-07/index.html">
+<meta property="og:site_name" content="WincherToldYou">
+<meta property="og:description" content="SOUL Admin &amp;amp; 网关 Zookeeper 数据同步 目前SOUL提供了这几种数据同步方式, 上一节我们使用了WebSocket, 这一节使用Zookeerper来做数据同步, 代码实现结构与WebSocket如出一辙, 只不过具体的同步过程使用了Zookeeper自身的特性 启动 zk,我用的docker docker run -p 2181:2181 --restart unl">
+<meta property="og:image" content="http://wincher.cn/2021/01/22/soul-gateway-src-code-learning-07/00sync_starters.png">
+<meta property="og:image" content="http://wincher.cn/2021/01/22/soul-gateway-src-code-learning-07/01.png">
+<meta property="og:image" content="http://wincher.cn/2021/01/22/soul-gateway-src-code-learning-07/02sync_button.jpg">
+<meta property="og:image" content="http://wincher.cn/2021/01/22/soul-gateway-src-code-learning-07/03sync_all_button.jpg">
+<meta property="og:updated_time" content="2021-01-24T17:24:24.068Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="soul_gateway_src_code_learning_07">
+<meta name="twitter:description" content="SOUL Admin &amp;amp; 网关 Zookeeper 数据同步 目前SOUL提供了这几种数据同步方式, 上一节我们使用了WebSocket, 这一节使用Zookeerper来做数据同步, 代码实现结构与WebSocket如出一辙, 只不过具体的同步过程使用了Zookeeper自身的特性 启动 zk,我用的docker docker run -p 2181:2181 --restart unl">
+<meta name="twitter:image" content="http://wincher.cn/2021/01/22/soul-gateway-src-code-learning-07/00sync_starters.png">
+  <!-- Canonical links -->
+  <link rel="canonical" href="http://wincher.cn/2021/01/22/soul-gateway-src-code-learning-07/index.html">
+  
+    <link rel="alternate" href="/atom.xml" title="WincherToldYou" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png" type="image/x-icon">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+  
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitment@0.0.3/style/default.min.css">
+  
+  
+  
 </head>
-<body>
-  <div id="app"></div>
-  <script type="text/javascript">
-    window.root = "/"
-  </script>
-  <script src="/js/manifest.js"></script>
-  <script src="/js/vendor.js"></script>
-  <script src="/js/app.js"></script>
+
+
+<body class="main-center" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://github.com/Wincher" target="_blank">
+          <img class="img-circle img-rotate" src="/images/avatar.jpeg" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">Wincher</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">Software Engineer</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> Beijing, China</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="Search" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="Type something..." x-webkit-speech />
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav ">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">Home</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">Archives</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories">
+            
+            <i class="icon icon-folder"></i>
+            
+            <span class="menu-title">Categories</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags">
+            
+            <i class="icon icon-tags"></i>
+            
+            <span class="menu-title">Tags</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-repository">
+          <a href="/repository">
+            
+            <i class="icon icon-project"></i>
+            
+            <span class="menu-title">Repository</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-links">
+          <a href="/links">
+            
+            <i class="icon icon-friendship"></i>
+            
+            <span class="menu-title">Links</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about">
+            
+            <i class="icon icon-cup-fill"></i>
+            
+            <span class="menu-title">About</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/Wincher" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">Board</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+                <p>Welcome!</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Docker/">Docker</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/ForRemember/">ForRemember</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/HBase/">HBase</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hadoop/">Hadoop</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Hadoop/HBase/">HBase</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hive/">Hive</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/hadoop/">hadoop</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/">linux</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/operation/">operation</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/tools/">tools</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/感想/">感想</a><span class="category-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget-body">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Docker/">Docker</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ForRemember/">ForRemember</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HBase/">HBase</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hive/">Hive</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SOUL/">SOUL</a><span class="tag-list-count">16</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/environment/">environment</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/stuff/">stuff</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/感想/">感想</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget-body tagcloud">
+      <a href="/tags/Docker/" style="font-size: 13.33px;">Docker</a> <a href="/tags/ForRemember/" style="font-size: 13.67px;">ForRemember</a> <a href="/tags/HBase/" style="font-size: 13px;">HBase</a> <a href="/tags/Hive/" style="font-size: 13px;">Hive</a> <a href="/tags/SOUL/" style="font-size: 14px;">SOUL</a> <a href="/tags/environment/" style="font-size: 13px;">environment</a> <a href="/tags/linux/" style="font-size: 13px;">linux</a> <a href="/tags/stuff/" style="font-size: 13.33px;">stuff</a> <a href="/tags/感想/" style="font-size: 13px;">感想</a>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Archive</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/02/">February 2021</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">January 2021</a><span class="archive-list-count">15</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/10/">October 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">July 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">August 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">April 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">February 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a><span class="archive-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget-body">
+      <ul class="recent-post-list list-unstyled ">
+        
+          <li>
+            
+            <div class="item-thumb">
+              <a href="/2021/02/05/soul-gateway-src-code-learning-18/" class="thumb">
+    
+    
+        <span class="thumb-image thumb-none"></span>
+    
+</a>
+
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                
+              </p>
+              <p class="item-title">
+                <a href="/2021/02/05/soul-gateway-src-code-learning-18/" class="title">soul_gateway_src_code_learning_18</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2021-02-05T14:12:00.000Z" itemprop="datePublished">2021-02-05</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-thumb">
+              <a href="/2021/02/04/soul-gateway-src-code-learning-17/" class="thumb">
+    
+    
+        <span class="thumb-image thumb-none"></span>
+    
+</a>
+
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                
+              </p>
+              <p class="item-title">
+                <a href="/2021/02/04/soul-gateway-src-code-learning-17/" class="title">soul_gateway_src_code_learning_17</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2021-02-04T10:49:23.000Z" itemprop="datePublished">2021-02-04</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-thumb">
+              <a href="/2021/02/01/soul-gateway-src-code-learning-16/" class="thumb">
+    
+    
+        <span class="thumb-image thumb-none"></span>
+    
+</a>
+
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                
+              </p>
+              <p class="item-title">
+                <a href="/2021/02/01/soul-gateway-src-code-learning-16/" class="title">soul_gateway_src_code_learning_16</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2021-02-01T15:50:07.000Z" itemprop="datePublished">2021-02-01</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-thumb">
+              <a href="/2021/01/30/soul-gateway-src-code-learning-15/" class="thumb">
+    
+    
+        <span class="thumb-image thumb-none"></span>
+    
+</a>
+
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                
+              </p>
+              <p class="item-title">
+                <a href="/2021/01/30/soul-gateway-src-code-learning-15/" class="title">soul_gateway_src_code_learning_15</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2021-01-30T12:21:31.000Z" itemprop="datePublished">2021-01-30</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-thumb">
+              <a href="/2021/01/30/soul-gateway-src-code-learning-14/" class="thumb">
+    
+    
+        <span class="thumb-image thumb-none"></span>
+    
+</a>
+
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                
+              </p>
+              <p class="item-title">
+                <a href="/2021/01/30/soul-gateway-src-code-learning-14/" class="title">soul_gateway_src_code_learning_14</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2021-01-29T18:36:35.000Z" itemprop="datePublished">2021-01-30</time>
+              </p>
+            </div>
+          </li>
+          
+      </ul>
+    </div>
+  </div>
+  
+
+    
+  </div>
+</aside>
+
+  
+  
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-soul-gateway-src-code-learning-07" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      soul_gateway_src_code_learning_07
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2021/01/22/soul-gateway-src-code-learning-07/" class="article-date">
+	  <time datetime="2021-01-21T17:03:03.000Z" itemprop="datePublished">2021-01-22</time>
+	</a>
+</span>
+        
+        
+
+        
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2021/01/22/soul-gateway-src-code-learning-07/#comments" class="article-comment-link">Comments</a></span>
+        
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <h2 id="SOUL-Admin-amp-网关-Zookeeper-数据同步"><a href="#SOUL-Admin-amp-网关-Zookeeper-数据同步" class="headerlink" title="SOUL Admin &amp; 网关 Zookeeper 数据同步"></a>SOUL Admin &amp; 网关 Zookeeper 数据同步</h2><p><img src="/2021/01/22/soul-gateway-src-code-learning-07/00sync_starters.png" alt="img"></p>
+<p>目前SOUL提供了这几种数据同步方式, 上一节我们使用了WebSocket, 这一节使用Zookeerper来做数据同步, 代码实现结构与WebSocket如出一辙, 只不过具体的同步过程使用了Zookeeper自身的特性</p>
+<p>启动 zk,我用的docker <code>docker run -p 2181:2181 --restart unless-stopped --name zk -d zookeeper</code></p>
+<p>保证 soul-bootstrap pom.xml 引入</p>
+<pre><code class="xml">        &lt;dependency&gt;
+            &lt;groupId&gt;org.dromara&lt;/groupId&gt;
+            &lt;artifactId&gt;soul-spring-boot-starter-sync-data-zookeeper&lt;/artifactId&gt;
+            &lt;version&gt;${project.version}&lt;/version&gt;
+        &lt;/dependency&gt;
+</code></pre>
+<p>soul-bootstrap/src/main/resources/application-local.yml 打开zk的配置,注释掉websocket(不注释掉的话就两种同步方式都开启,没有必要)</p>
+<pre><code class="yaml">soul:
+    sync:
+#        websocket :
+#             urls: ws://localhost:9095/websocket
+
+        zookeeper:
+             url: localhost:2181
+             sessionTimeout: 5000
+             connectionTimeout: 2000
+</code></pre>
+<p>启动 bootstrap</p>
+<pre><code class="bash">2021-01-22 01:22:42.073  INFO 48117 --- [           main] org.I0Itec.zkclient.ZkClient             : Waiting for keeper state SyncConnected
+2021-01-22 01:22:42.077  INFO 48117 --- [localhost:2181)] org.apache.zookeeper.ClientCnxn          : Opening socket connection to server localhost/127.0.0.1:2181. Will not attempt to authenticate using SASL (unknown error)
+2021-01-22 01:22:42.093  INFO 48117 --- [localhost:2181)] org.apache.zookeeper.ClientCnxn          : Socket connection established, initiating session, client: /127.0.0.1:61106, server: localhost/127.0.0.1:2181
+2021-01-22 01:22:42.105  INFO 48117 --- [localhost:2181)] org.apache.zookeeper.ClientCnxn          : Session establishment complete on server localhost/127.0.0.1:2181, sessionid = 0x100000074b10006, negotiated timeout = 5000
+2021-01-22 01:22:42.107  INFO 48117 --- [ain-EventThread] org.I0Itec.zkclient.ZkClient             : zookeeper state changed (SyncConnected)
+</code></pre>
+<p>查看zk, 我用是 zkCli, 可以看到在 / 路径下有了soul</p>
+<pre><code>[zk: localhost:2181(CONNECTED) 2] ls /soul
+[auth, metaData, plugin]
+ls /soul/auth
+[]
+[zk: localhost:2181(CONNECTED) 4] ls /soul/metaData
+[]
+[zk: localhost:2181(CONNECTED) 5] ls /soul/plugin
+[]
+</code></pre><p>由于admin还没启动 目前auth, metaData, plugin都是空的</p>
+<p>同样修改soul-admin/src/main/resources/application.yml 打开zookeeper配置</p>
+<pre><code class="yaml">  sync:
+#    websocket:
+#      enabled: true
+    zookeeper:
+        url: localhost:2181
+        sessionTimeout: 5000
+        connectionTimeout: 2000
+</code></pre>
+<p>启动 soul-admin/src/main/java/org/dromara/soul/admin/SoulAdminBootstrap.java</p>
+<pre><code class="bash">2021-01-22 01:30:59.421  INFO 48224 --- [           main] org.I0Itec.zkclient.ZkClient             : Waiting for keeper state SyncConnected
+2021-01-22 01:30:59.426  INFO 48224 --- [localhost:2181)] org.apache.zookeeper.ClientCnxn          : Opening socket connection to server localhost/0:0:0:0:0:0:0:1:2181. Will not attempt to authenticate using SASL (unknown error)
+2021-01-22 01:30:59.443  INFO 48224 --- [localhost:2181)] org.apache.zookeeper.ClientCnxn          : Socket connection established, initiating session, client: /0:0:0:0:0:0:0:1:61453, server: localhost/0:0:0:0:0:0:0:1:2181
+2021-01-22 01:30:59.453  INFO 48224 --- [localhost:2181)] org.apache.zookeeper.ClientCnxn          : Session establishment complete on server localhost/0:0:0:0:0:0:0:1:2181, sessionid = 0x100000074b10007, negotiated timeout = 5000
+2021-01-22 01:30:59.454  INFO 48224 --- [ain-EventThread] org.I0Itec.zkclient.ZkClient             : zookeeper state changed (SyncConnected)
+</code></pre>
+<p>看log像是已经建立连接, 但并未找到同步数据的log, 查看zk, </p>
+<pre><code>[zk: localhost:2181(CONNECTED) 2] ls /soul
+[auth, metaData, plugin]
+ls /soul/auth
+[]
+[zk: localhost:2181(CONNECTED) 4] ls /soul/metaData
+[]
+[zk: localhost:2181(CONNECTED) 5] ls /soul/plugin
+[]
+</code></pre><p>的确没有同步, 我们先分析一下zk同步的代码逻辑</p>
+<p>上一节分析 WebSocket数据同步的时候, WebsocketSyncDataService实现了, WebSocketsoul-sync-data-center/soul-sync-data-api/src/main/java/org/dromara/soul/sync/data/api/SyncDataService.java, 这个接口就是为多种数据同步方式定义的标准, 同样可以找到soul-sync-data-center/soul-sync-data-zookeeper/src/main/java/org/dromara/soul/sync/data/zookeeper/ZookeeperSyncDataService.java</p>
+<pre><code class="java">                //构造方法中就会使用zookeeper的监听三组数据
+                watcherData();
+        watchAppAuth();
+        watchMetaData();
+       //都是相同逻辑,只看一个就好 
+        private void watcherData() {
+        final String pluginParent = ZkPathConstants.PLUGIN_PARENT;
+        List&lt;String&gt; pluginZKs = zkClientGetChildren(pluginParent);
+        //这里分别再去监听所有插件的内容
+        for (String pluginName : pluginZKs) {
+            watcherAll(pluginName);
+        }
+        //就是各种递归一层一层的找到所有可以被监听的节点都给与监听
+        zkClient.subscribeChildChanges(pluginParent, (parentPath, currentChildren) -&gt; {
+            if (CollectionUtils.isNotEmpty(currentChildren)) {
+                for (String pluginName : currentChildren) {
+                    watcherAll(pluginName);
+                }
+            }
+        });
+    }
+</code></pre>
+<p>大部分最后都会来到下面的代码, 可以看到这个代码被rule, selector, auth,metadata的监听最后调用 </p>
+<p><img src="/2021/01/22/soul-gateway-src-code-learning-07/01.png" alt="img"></p>
+<pre><code class="java">//最后上面的, 可以看到根局不同的group key,如果还有监听,如果路径下面有还有paths, 调用队一行的subscribe**datachagnes方法
+private void subscribeChildChanges(final ConfigGroupEnum groupKey, final String groupParentPath, final List&lt;String&gt; childrenList) {
+        switch (groupKey) {
+            case SELECTOR:
+                zkClient.subscribeChildChanges(groupParentPath, (parentPath, currentChildren) -&gt; {
+                    if (CollectionUtils.isNotEmpty(currentChildren)) {
+                        List&lt;String&gt; addSubscribePath = addSubscribePath(childrenList, currentChildren);
+                        addSubscribePath.stream().map(addPath -&gt; {
+                            String realPath = buildRealPath(parentPath, addPath);
+                            cacheSelectorData(zkClient.readData(realPath));
+                            return realPath;
+                        }).forEach(this::subscribeSelectorDataChanges);
+
+                    }
+                });
+                break;
+            case RULE:
+                zkClient.subscribeChildChanges(groupParentPath, (parentPath, currentChildren) -&gt; {
+                    if (CollectionUtils.isNotEmpty(currentChildren)) {
+                        List&lt;String&gt; addSubscribePath = addSubscribePath(childrenList, currentChildren);
+                        // Get the newly added node data and subscribe to that node
+                        addSubscribePath.stream().map(addPath -&gt; {
+                            String realPath = buildRealPath(parentPath, addPath);
+                            cacheRuleData(zkClient.readData(realPath));
+                            return realPath;
+                        }).forEach(this::subscribeRuleDataChanges);
+                    }
+                });
+                break;
+            case APP_AUTH:
+                zkClient.subscribeChildChanges(groupParentPath, (parentPath, currentChildren) -&gt; {
+                    if (CollectionUtils.isNotEmpty(currentChildren)) {
+                        final List&lt;String&gt; addSubscribePath = addSubscribePath(childrenList, currentChildren);
+                        addSubscribePath.stream().map(children -&gt; {
+                            final String realPath = buildRealPath(parentPath, children);
+                            cacheAuthData(zkClient.readData(realPath));
+                            return realPath;
+                        }).forEach(this::subscribeAppAuthDataChanges);
+                    }
+                });
+                break;
+            case META_DATA:
+                zkClient.subscribeChildChanges(groupParentPath, (parentPath, currentChildren) -&gt; {
+                    if (CollectionUtils.isNotEmpty(currentChildren)) {
+                        final List&lt;String&gt; addSubscribePath = addSubscribePath(childrenList, currentChildren);
+                        addSubscribePath.stream().map(children -&gt; {
+                            final String realPath = buildRealPath(parentPath, children);
+                            cacheMetaData(zkClient.readData(realPath));
+                            return realPath;
+                        }).forEach(this::subscribeMetaDataChanges);
+                    }
+                });
+                break;
+            default:
+                throw new IllegalStateException(&quot;Unexpected groupKey: &quot; + groupKey);
+        }
+    }
+</code></pre>
+<p>下面代码是核心逻辑, 当监听的节点发生变化, 同步数据 TODO: 至于 pluginDataSubscriber 等一系列的DataSubscriber后面分析</p>
+<pre><code class="java">private void subscribePluginDataChanges(final String pluginPath, final String pluginName) {
+        zkClient.subscribeDataChanges(pluginPath, new IZkDataListener() {
+
+            @Override
+
+            public void handleDataChange(final String dataPath, final Object data) {
+                Optional.ofNullable(data)
+                        .ifPresent(d -&gt; Optional.ofNullable(pluginDataSubscriber).ifPresent(e -&gt; e.onSubscribe((PluginData) d)));
+            }
+
+            @Override
+            public void handleDataDeleted(final String dataPath) {
+                final PluginData data = new PluginData();
+                data.setName(pluginName);
+                Optional.ofNullable(pluginDataSubscriber).ifPresent(e -&gt; e.unSubscribe(data));
+            }
+        });
+    }
+</code></pre>
+<p>打开 <a href="http://localhost:9095/#/plug/divide" target="_blank" rel="external">http://localhost:9095/#/plug/divide</a>, 点击</p>
+<p><img src="/2021/01/22/soul-gateway-src-code-learning-07/02sync_button.jpg" alt="img"></p>
+<p>在查看zk, 发现有值了</p>
+<pre><code class="bash">[zk: localhost:2181(CONNECTED) 19] ls /soul/plugin
+[divide]
+</code></pre>
+<p>点一个插件就有一个插件的值, 这也未免太…我又找了一找, 果然 打开 <a href="http://localhost:9095/#/system/plugin" target="_blank" rel="external">http://localhost:9095/#/system/plugin</a></p>
+<p>点击 <img src="/2021/01/22/soul-gateway-src-code-learning-07/03sync_all_button.jpg" alt="img"> </p>
+<p>再次查看全部同步了</p>
+<pre><code>[zk: localhost:2181(CONNECTED) 22] ls /soul/plugin
+[context_path, divide, dubbo, hystrix, monitor, rate_limiter, resilience4j, rewrite, sentinel, sign, sofa, springCloud, tars, waf]
+</code></pre><p>我们使用浏览器的network追踪了下</p>
+<pre><code class="bash">Request URL: http://localhost:9095/plugin/syncPluginAll
+</code></pre>
+<p>去看相关代码</p>
+<pre><code class="java">@PostMapping(&quot;/syncPluginAll&quot;)
+    public SoulAdminResult syncPluginAll() {
+        boolean success = syncDataService.syncAll(DataEventTypeEnum.REFRESH);
+        if (success) {
+            return SoulAdminResult.success(SoulResultMessage.SYNC_SUCCESS);
+        } else {
+            return SoulAdminResult.error(SoulResultMessage.SYNC_FAIL);
+        }
+    }
+</code></pre>
+<p>后面章节会以此为线索, 分析SyncDataService的工作机制</p>
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="http://wincher.cn/2021/01/22/soul-gateway-src-code-learning-07/" title="soul_gateway_src_code_learning_07" target="_blank" rel="external">http://wincher.cn/2021/01/22/soul-gateway-src-code-learning-07/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/Wincher" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/avatar.jpeg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/Wincher" target="_blank"><span class="text-dark">Wincher</span><small class="ml-1x">Software Engineer</small></a></h3>
+        <div>Mainly using Java</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    <li class="prev">
+      <a href="/2021/01/23/soul-gateway-src-code-learning-08/" title="soul_gateway_src_code_learning_08"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;Newer</span></a>
+    </li>
+    
+    
+    <li class="next">
+      <a href="/2021/01/20/soul-gateway-src-code-learning-06/" title="soul_gateway_src_code_learning_06"><span>Older&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+  </ul>
+  
+  
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-fancy btn-donate pop-onhover bg-gradient-warning" data-toggle="modal" data-target="#donateModal"><span>$</span></button>
+  <!-- <div class="wave-icon wave-icon-danger btn-donate" data-toggle="modal" data-target="#donateModal">
+    <div class="wave-circle"><span class="icon"><i class="icon icon-bill"></i></span></div>
+  </div> -->
+  
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="weibo,qq,wechat,facebook,twitter" data-mobile-sites="weibo,qq,qzone"></div>
+    
+  </div>
+  </div>
+</nav>
+  
+<!-- Modal -->
+<div class="modal modal-center modal-small modal-xs-full fade" id="donateModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content donate">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <div class="modal-body">
+        <div class="donate-box">
+          <div class="donate-head">
+            <p>Maybe you could buy me a cup of coffee.</p>
+          </div>
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade active in" id="alipay">
+              <div class="donate-payimg">
+                <img src="/images/avatar.jpeg" alt="Scan Qrcode" title="Scan" />
+              </div>
+              <p class="text-muted mv">Scan this qrcode</p>
+              <p class="text-grey">Open alipay app scan this qrcode, buy me a coffee!</p>
+            </div>
+            <div role="tabpanel" class="tab-pane fade" id="wechatpay">
+              <div class="donate-payimg">
+                <img src="/images/avatar.jpeg" alt="Scan Qrcode" title="Scan" />
+              </div>
+              <p class="text-muted mv">Scan this qrcode</p>
+              <p class="text-grey">Open wechat app scan this qrcode, buy me a coffee!</p>
+            </div>
+          </div>
+          <div class="donate-footer">
+            <ul class="nav nav-tabs nav-justified" role="tablist">
+              <li role="presentation" class="active">
+                <a href="#alipay" id="alipay-tab" role="tab" data-toggle="tab" aria-controls="alipay" aria-expanded="true"><i class="icon icon-alipay"></i> alipay</a>
+              </li>
+              <li role="presentation" class="">
+                <a href="#wechatpay" role="tab" id="wechatpay-tab" data-toggle="tab" aria-controls="wechatpay" aria-expanded="false"><i class="icon icon-wepay"></i> wechat payment</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/Wincher" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    <div class="copyright">
+    	
+        <div class="publishby">
+        	Theme by <a href="https://github.com/cofess" target="_blank"> cofess </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>.
+        </div>
+    </div>
+</footer>
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+<script src="/js/plugin.min.js"></script>
+<script src="/js/application.js"></script>
+
+    <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+
+
+
+
+   
+
+
+
+
+   
+    
+<script src="//cdn.jsdelivr.net/npm/gitment@0.0.3/dist/gitment.browser.min.js"></script>
+<script>
+var gitment = new Gitment({
+  // id默认为当前页面url，如果url后带参数或锚点，gitment要重新初始化
+  // https://github.com/imsun/gitment/issues/55
+  // 解决方案：id:window.location.pathname,或者将id设置为当前页面标题
+  id: 'soul_gateway_src_code_learning_07', 
+  owner: '', // 可以是你的GitHub用户名，也可以是github id
+  repo: '',
+  oauth: {
+    client_id: '',
+    client_secret: '',
+  }
+})
+gitment.render('comments')
+</script>
+
+
+
+
+
+
+
+
+
 </body>
 </html>
