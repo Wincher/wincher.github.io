@@ -2,7 +2,7 @@
 title: failed-to-load-ldlinux.c32
 date: 2019-02-17 11:27:20
 tags:
-    --stuff
+    - stuff
 ---
 
 ## dsec
