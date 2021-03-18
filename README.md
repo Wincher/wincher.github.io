@@ -40,4 +40,3 @@ cp ../_material_src/source/img/avatar.jpeg  source/img/avatar.jpeg
 ## create a new post
 
 `hexo new`
-
