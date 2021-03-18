@@ -224,7 +224,14 @@
 </li>
 </ul>
 <h2 id="2-搭建"><a href="#2-搭建" class="headerlink" title="2. 搭建:"></a>2. 搭建:</h2><ul>
-<li><img src="/2018/01/19/hadoop-hbase-cluster-on-ubuntu/2.png" alt=""><br>准备好这几个项目的包,去对应的官网下载即可  <ul>
+<li><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/2018/01/19/hadoop-hbase-cluster-on-ubuntu/2.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>  
+准备好这几个项目的包,去对应的官网下载即可  <ul>
 <li>hadoop  </li>
 <li>hbase  </li>
 <li>zookeeper  </li>
@@ -245,7 +252,13 @@ slave2
 </code></pre><p>9.将$HADOOP_CONFIG_HOME的core-site.xml和hdfs-site.xml复制一份到$HBASE_HOME/conf</p>
 </li>
 </ul>
-<h2 id="3-启动-amp-验证"><a href="#3-启动-amp-验证" class="headerlink" title="3. 启动&amp;验证"></a>3. 启动&amp;验证</h2><p>然后在master:<br>1.start-all.sh启动hadoop,<br>访问master:50070看到:<br><img src="/2018/01/19/hadoop-hbase-cluster-on-ubuntu/16.png" alt=""><br>访问master:8088:<br><img src="/2018/01/19/hadoop-hbase-cluster-on-ubuntu/17.png" alt=""><br>2.开启zookeeper<br><code>/usr/local/zookeeper/bin/zkServer.sh start</code><br>3.start-hbase.sh<br>访问master:16010<br><img src="/2018/01/19/hadoop-hbase-cluster-on-ubuntu/19.png" alt=""><br>至此基本的的Hadoop,HBase集群就搭建完成了</p>
+<h2 id="3-启动-amp-验证"><a href="#3-启动-amp-验证" class="headerlink" title="3. 启动&amp;验证"></a>3. 启动&amp;验证</h2><p>然后在master:<br>1.start-all.sh启动hadoop,<br>访问master:50070看到:<br><img src="/2018/01/19/hadoop-hbase-cluster-on-ubuntu/16.png" alt=""><br>访问master:8088:<br><img src="/2018/01/19/hadoop-hbase-cluster-on-ubuntu/17.png" alt=""><br>2.开启zookeeper<br><code>/usr/local/zookeeper/bin/zkServer.sh start</code><br>3.start-hbase.sh<br>访问master:16010<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/2018/01/19/hadoop-hbase-cluster-on-ubuntu/19.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure><br>至此基本的的Hadoop,HBase集群就搭建完成了</p>
 
         </div>
 

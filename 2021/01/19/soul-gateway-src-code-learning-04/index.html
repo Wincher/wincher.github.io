@@ -206,7 +206,13 @@
 </code></pre>
 <p>同样可以看到之前启动 soul-examples-http, soul-examples-dubbo 时的类似log, 显然sofa的服务也注册到了soul</p>
 <p>访问 <a href="http://127.0.0.1:9095/#/plug/sofa" target="_blank" rel="external">http://127.0.0.1:9095/#/plug/sofa</a> 同样可以看到 刚起的实例服务注册了rule 和selector 到了soul上</p>
-<p><img src="/2021/01/19/soul-gateway-src-code-learning-04/00register.png" alt="img"></p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/2021/01/19/soul-gateway-src-code-learning-04/00register.png" alt="img" title="">
+                </div>
+                <div class="image-caption">img</div>
+            </figure>
 <p>尝试通过网关访问 sofa 服务</p>
 <pre><code class="bash">$curl -i localhost:9195/sofa/findAll
 HTTP/1.1 200 OK
@@ -259,7 +265,13 @@ content-length: 0
 &lt;!-- sofa plugin end --&gt;
 </code></pre>
 <p>重启bootstrap 可以看到sofa plugin被加载了</p>
-<p><img src="/2021/01/19/soul-gateway-src-code-learning-04/01sofa_plugin_log.png" alt="img"></p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/2021/01/19/soul-gateway-src-code-learning-04/01sofa_plugin_log.png" alt="img" title="">
+                </div>
+                <div class="image-caption">img</div>
+            </figure>
 <p>再次尝试请求 </p>
 <pre><code class="bash">curl localhost:9195/sofa/findAll
 {&quot;code&quot;:200,&quot;message&quot;:&quot;Access to success!&quot;,&quot;data&quot;:{&quot;name&quot;:&quot;hello world Soul Sofa , findAll&quot;,&quot;id&quot;:&quot;1392929023&quot;}}%

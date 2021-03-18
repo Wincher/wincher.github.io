@@ -235,7 +235,13 @@
 </code></pre>
 <p>显然我们通过 <a href="http://localhost:9095/configs/fetch" target="_blank" rel="external">http://localhost:9095/configs/fetch</a> 同步了配置</p>
 <p>接下来修改一个配置,可以看到</p>
-<p><img src="/2021/01/23/soul-gateway-src-code-learning-08/00change_config.png" alt="img"></p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/2021/01/23/soul-gateway-src-code-learning-08/00change_config.png" alt="img" title="">
+                </div>
+                <div class="image-caption">img</div>
+            </figure>
 <p>admin log</p>
 <pre><code class="bash">2021-01-23 00:42:55.071  INFO 62391 --- [0.0-9095-exec-5] o.d.s.a.l.AbstractDataChangedListener    : update config cache[SELECTOR], old: {group=&#39;SELECTOR&#39;, md5=&#39;55e041ea36b518946ef09f9ed5d16ffe&#39;, lastModifyTime=1611333660488}, updated: {group=&#39;SELECTOR&#39;, md5=&#39;c8fa3ad3868f3ea1947f3641c753e888&#39;, lastModifyTime=1611333775071}
 2021-01-23 00:42:55.077  INFO 62391 --- [-long-polling-2] a.l.h.HttpLongPollingDataChangedListener : send response with the changed group,ip=127.0.0.1, group=SELECTOR, changeTime=1611333775074

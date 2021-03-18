@@ -235,11 +235,29 @@ datasource:
 </code></pre>
 <p>在IDEA中运行 soul-admin 的入口函数 soul-admin/src/main/java/org/dromara/soul/admin/SoulAdminBootstrap.java</p>
 <p>访问 <a href="http://127.0.0.1:9095" target="_blank" rel="external">http://127.0.0.1:9095</a> 我们就看到首页了</p>
-<p><img src="/2021/01/15/soul-gateway-src-code-learning-01/00login.png" alt="pic"></p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/2021/01/15/soul-gateway-src-code-learning-01/00login.png" alt="pic" title="">
+                </div>
+                <div class="image-caption">pic</div>
+            </figure>
 <p>默认的 账号: <strong>admin</strong> 密码:<strong>123456</strong></p>
-<p><img src="/2021/01/15/soul-gateway-src-code-learning-01/01index.png" alt="pic"></p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/2021/01/15/soul-gateway-src-code-learning-01/01index.png" alt="pic" title="">
+                </div>
+                <div class="image-caption">pic</div>
+            </figure>
 <p>随后在IDEA中运行 soul-bootstrap 的入口函数 soul-bootstrap/src/main/java/org/dromara/soul/bootstrap/SoulBootstrapApplication.java</p>
-<p><img src="/2021/01/15/soul-gateway-src-code-learning-01/02start_bootstrap_log.jpg" alt="pic"></p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/2021/01/15/soul-gateway-src-code-learning-01/02start_bootstrap_log.jpg" alt="pic" title="">
+                </div>
+                <div class="image-caption">pic</div>
+            </figure>
 <p>注意这个log是soul-admin产生的,也就是soul-bootstrap启动后与admin建立了连接</p>
 <p>这个时候访问 <a href="http://localhost:9195/" target="_blank" rel="external">http://localhost:9195/</a> 也就是soul-bootstrap会返回</p>
 <pre><code class="json">{
@@ -253,13 +271,31 @@ datasource:
 </code></pre>
 <p>根据提示我们打开divide页面, <a href="http://localhost:9095/#/plug/divide" target="_blank" rel="external">http://localhost:9095/#/plug/divide</a></p>
 <p>添加selector</p>
-<p><img src="/2021/01/15/soul-gateway-src-code-learning-01/03selector.png" alt="pic"></p>
-<p><img src="/2021/01/15/soul-gateway-src-code-learning-01/030_opt.jpg" alt="pic"></p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/2021/01/15/soul-gateway-src-code-learning-01/03selector.png" alt="pic" title="">
+                </div>
+                <div class="image-caption">pic</div>
+            </figure>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/2021/01/15/soul-gateway-src-code-learning-01/030_opt.jpg" alt="pic" title="">
+                </div>
+                <div class="image-caption">pic</div>
+            </figure>
 <blockquote>
 <p>添加selector中我发现 protocol 和 ip:port 会拼接成我们的代理目标地址, 也就是说https<strong>://</strong> 这部分也是要手动写的,这是可以优化的点, 做成可选项的 schema, ip, 和port可选缺省 80, 这样可以更规范配置,另外如上图所示这样的写法也是可以正常被代理到 <a href="http://baidu.com" target="_blank" rel="external">http://baidu.com</a> 的</p>
 </blockquote>
 <p>添加rule</p>
-<p><img src="/2021/01/15/soul-gateway-src-code-learning-01/04rule.png" alt="pic"></p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/2021/01/15/soul-gateway-src-code-learning-01/04rule.png" alt="pic" title="">
+                </div>
+                <div class="image-caption">pic</div>
+            </figure>
 <pre><code class="bash">$curl -i localhost:9195
 HTTP/1.1 302 Found
 Content-Length: 161

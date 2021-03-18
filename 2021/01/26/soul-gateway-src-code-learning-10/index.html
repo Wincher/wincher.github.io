@@ -21,20 +21,20 @@
     
     
     <meta name="keywords" content="SOUL">
-    <meta name="description" content="SOUL admin/bootstrap cluster 模拟soul 网关集群部署, 启动2个admin, 2个bootstrap  如上开启配置可以启动多个实例,也可以打包后通过java -jar启动 在soul-bootstrap的application.yml配置刚才启动的soul-admin的 url soul:     sync:         websocket :">
+    <meta name="description" content="SOUL admin/bootstrap cluster 模拟soul 网关集群部署, 启动2个admin, 2个bootstrap                                                                                              img              如上开启配置可以启动多个实例,也可以打包后通过">
 <meta name="keywords" content="SOUL">
 <meta property="og:type" content="article">
 <meta property="og:title" content="soul_gateway_src_code_learning_10">
 <meta property="og:url" content="http://wincher.cn/2021/01/26/soul-gateway-src-code-learning-10/index.html">
 <meta property="og:site_name" content="WincherToldYou">
-<meta property="og:description" content="SOUL admin/bootstrap cluster 模拟soul 网关集群部署, 启动2个admin, 2个bootstrap  如上开启配置可以启动多个实例,也可以打包后通过java -jar启动 在soul-bootstrap的application.yml配置刚才启动的soul-admin的 url soul:     sync:         websocket :">
+<meta property="og:description" content="SOUL admin/bootstrap cluster 模拟soul 网关集群部署, 启动2个admin, 2个bootstrap                                                                                              img              如上开启配置可以启动多个实例,也可以打包后通过">
 <meta property="og:image" content="http://wincher.cn/2021/01/26/soul-gateway-src-code-learning-10/00parallel_run.jpg">
 <meta property="og:image" content="http://wincher.cn/2021/01/26/soul-gateway-src-code-learning-10/01no_data_admins.png">
 <meta property="og:image" content="http://wincher.cn/2021/01/26/soul-gateway-src-code-learning-10/02diff_admin_selector.jpg">
 <meta property="og:updated_time" content="2021-01-25T18:14:59.204Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="soul_gateway_src_code_learning_10">
-<meta name="twitter:description" content="SOUL admin/bootstrap cluster 模拟soul 网关集群部署, 启动2个admin, 2个bootstrap  如上开启配置可以启动多个实例,也可以打包后通过java -jar启动 在soul-bootstrap的application.yml配置刚才启动的soul-admin的 url soul:     sync:         websocket :">
+<meta name="twitter:description" content="SOUL admin/bootstrap cluster 模拟soul 网关集群部署, 启动2个admin, 2个bootstrap                                                                                              img              如上开启配置可以启动多个实例,也可以打包后通过">
 <meta name="twitter:image" content="http://wincher.cn/2021/01/26/soul-gateway-src-code-learning-10/00parallel_run.jpg">
     
     <link rel="shortcut icon" href="/favicon.ico">
@@ -192,7 +192,13 @@
         <div class="post-content" id="post-content" itemprop="postContent">
             <p>SOUL admin/bootstrap cluster</p>
 <p>模拟soul 网关集群部署, 启动2个admin, 2个bootstrap</p>
-<p><img src="/2021/01/26/soul-gateway-src-code-learning-10/00parallel_run.jpg" alt="img"></p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/2021/01/26/soul-gateway-src-code-learning-10/00parallel_run.jpg" alt="img" title="">
+                </div>
+                <div class="image-caption">img</div>
+            </figure>
 <p>如上开启配置可以启动多个实例,也可以打包后通过java -jar启动</p>
 <p>在<code>soul-bootstrap</code>的<code>application.yml</code>配置刚才启动的<code>soul-admin</code>的 url</p>
 <pre><code class="yaml">soul:
@@ -201,7 +207,13 @@
              urls: ws://localhost:9095/websocket,ws://localhost:9096/websocket
 </code></pre>
 <p>启动后分别打开 <a href="http://localhost:9095/#/plug/divide" target="_blank" rel="external">http://localhost:9095/#/plug/divide</a>, <a href="http://localhost:9096/#/plug/divide" target="_blank" rel="external">http://localhost:9096/#/plug/divide</a>,可以看到目前都没有数据</p>
-<p><img src="/2021/01/26/soul-gateway-src-code-learning-10/01no_data_admins.png" alt="img"></p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/2021/01/26/soul-gateway-src-code-learning-10/01no_data_admins.png" alt="img" title="">
+                </div>
+                <div class="image-caption">img</div>
+            </figure>
 <p>启动一个soul-examples-http, 具体可参考前面的文章</p>
 <pre><code class="bash">$curl 127.0.0.1:9195/http/order/findById\?id=1
 {&quot;id&quot;:&quot;1&quot;,&quot;name&quot;:&quot;hello world findById&quot;}%
@@ -224,7 +236,13 @@ soul:
 public OrderDTO findById(@RequestParam(&quot;id&quot;) final String id) {}
 </code></pre>
 <p>启动后做下</p>
-<p><img src="/2021/01/26/soul-gateway-src-code-learning-10/02diff_admin_selector.jpg" alt="img"></p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/2021/01/26/soul-gateway-src-code-learning-10/02diff_admin_selector.jpg" alt="img" title="">
+                </div>
+                <div class="image-caption">img</div>
+            </figure>
 <p>可以看到 8188 和 8189 examples-http分别注册到了 9095和9096admin, 接下来测试下</p>
 <pre><code class="bash">$url 127.0.0.1:9196/http/order/findById\?id=1
 {&quot;id&quot;:&quot;1&quot;,&quot;name&quot;:&quot;hello world findById&quot;}%

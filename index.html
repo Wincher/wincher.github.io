@@ -522,7 +522,9 @@ public Mono&lt;Void&gt; execute(final ServerWebE...
         一个请求是如何被SOUL处理的至此, soul的基本使用方式已经清楚了, 接下来我们带着标题的疑问来看 一个请求是如何被SOUL处理的
 基于以前的结果,我们已知 会被 SoulWebHandler处理, SoulWebHandler实现了WebHandler, 我们来看下WebHandler的作用,
 
-注释写的很清楚, WebHandler用来处理request的, 我们知道  handle...
+                
+                    
+       ...
     
 
         <a href="/2021/01/26/soul-gateway-src-code-learning-11/" class="post-more waves-effect waves-button">
@@ -570,12 +572,13 @@ public Mono&lt;Void&gt; execute(final ServerWebE...
         SOUL admin/bootstrap cluster
 模拟soul 网关集群部署, 启动2个admin, 2个bootstrap
 
-如上开启配置可以启动多个实例,也可以打包后通过java -jar启动
-在soul-bootstrap的application.yml配置刚才启动的soul-admin的 url
-soul:
-    sync:
-        websocket :
-    ...
+                
+                    
+                    
+                
+                img
+            
+如上开启配置可以启动多个实例,也可以打包...
     
 
         <a href="/2021/01/26/soul-gateway-src-code-learning-10/" class="post-more waves-effect waves-button">

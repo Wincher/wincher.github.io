@@ -21,13 +21,13 @@
     
     
     <meta name="keywords" content="ForRemember,Docker">
-    <meta name="description" content="环境 安装按理来说应该大家看这篇文章环境可能没有装过docker，但是可能有的人装过了，我们要安装的是docker-ce也就是社区版，如果你希望安装比较新的版本请看如下操作，如果你装过了，请执行接下来的操作首先查看安装的Docker然后依次卸载掉 yum -y rmeove docker.x86_64 yum -y rmeove docker-client.x86_64 yum -y rmeove">
+    <meta name="description" content="环境                                                                                             pic              安装按理来说应该大家看这篇文章环境可能没有装过docker，但是可能有的人装过了，我们要安装的是docker-ce也就是社区版，如果你希望安装比较新的版本请看如下操作，如果你装">
 <meta name="keywords" content="ForRemember,Docker">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Docker入门(安装以及简单操作)">
 <meta property="og:url" content="http://wincher.cn/2018/01/21/docker-helloworld/index.html">
 <meta property="og:site_name" content="WincherToldYou">
-<meta property="og:description" content="环境 安装按理来说应该大家看这篇文章环境可能没有装过docker，但是可能有的人装过了，我们要安装的是docker-ce也就是社区版，如果你希望安装比较新的版本请看如下操作，如果你装过了，请执行接下来的操作首先查看安装的Docker然后依次卸载掉 yum -y rmeove docker.x86_64 yum -y rmeove docker-client.x86_64 yum -y rmeove">
+<meta property="og:description" content="环境                                                                                             pic              安装按理来说应该大家看这篇文章环境可能没有装过docker，但是可能有的人装过了，我们要安装的是docker-ce也就是社区版，如果你希望安装比较新的版本请看如下操作，如果你装">
 <meta property="og:image" content="http://wincher.cn/2018/01/21/docker-helloworld/1.png">
 <meta property="og:image" content="http://wincher.cn/2018/01/21/docker-helloworld/2.png">
 <meta property="og:image" content="http://wincher.cn/2018/01/21/docker-helloworld/3.png">
@@ -37,7 +37,7 @@
 <meta property="og:updated_time" content="2021-03-11T06:03:10.345Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Docker入门(安装以及简单操作)">
-<meta name="twitter:description" content="环境 安装按理来说应该大家看这篇文章环境可能没有装过docker，但是可能有的人装过了，我们要安装的是docker-ce也就是社区版，如果你希望安装比较新的版本请看如下操作，如果你装过了，请执行接下来的操作首先查看安装的Docker然后依次卸载掉 yum -y rmeove docker.x86_64 yum -y rmeove docker-client.x86_64 yum -y rmeove">
+<meta name="twitter:description" content="环境                                                                                             pic              安装按理来说应该大家看这篇文章环境可能没有装过docker，但是可能有的人装过了，我们要安装的是docker-ce也就是社区版，如果你希望安装比较新的版本请看如下操作，如果你装">
 <meta name="twitter:image" content="http://wincher.cn/2018/01/21/docker-helloworld/1.png">
     
     <link rel="shortcut icon" href="/favicon.ico">
@@ -204,7 +204,13 @@
 
         </div>
         <div class="post-content" id="post-content" itemprop="postContent">
-            <h2 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h2><p><img src="/2018/01/21/docker-helloworld/1.png" alt="pic"></p>
+            <h2 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h2><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/2018/01/21/docker-helloworld/1.png" alt="pic" title="">
+                </div>
+                <div class="image-caption">pic</div>
+            </figure>
 <h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>按理来说应该大家看这篇文章环境可能没有装过docker，但是可能有的人装过了，我们要安装的是docker-ce也就是社区版，如果你希望安装比较新的版本请看如下操作，如果你装过了，请执行接下来的操作<br>首先查看安装的Docker<br><img src="/2018/01/21/docker-helloworld/2.png" alt="pic"><br>然后依次卸载掉</p>
 <pre><code class="bash">yum -y rmeove docker.x86_64
 yum -y rmeove docker-client.x86_64
@@ -214,11 +220,29 @@ yum -y rmeove docker-common.x86_64
 <blockquote>
 <p>然后我门添加docker-ce的源文件(不要纠结:官方源目前下载下来的版本是1.12,Docker之前是个庞大的东西，什么都做，发展到1.12版本的时候容器已经剥离出来了，在17年Docker拆分出了Moby项目，专用于容器，Docker进行产品化分为Docker CE 和Docker EE 也就是社区版和开发版本，感兴趣的话的大家可以在网上寻找Docker的发展史之类的，我们的目的就是要下载一个相对新的社区版本，应该讲明白目的了吧)</p>
 </blockquote>
-<p>下面的命令就是为yum添加Docker CE版本的软件源<br><code>yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo</code><br><img src="/2018/01/21/docker-helloworld/3.png" alt="pic"><br>如果出现上图中的错误，那么就执行安装yum-config-manager<br>执行:<code>yun -y install yum-utils</code><br>然后继续执行上面为yun添加Docker CE源的命令<br><img src="/2018/01/21/docker-helloworld/4.png" alt="pic"><br>然后使用yum安装docker-ce：<br><code>yum -y install docker-ce</code><br>安装完成后查看docker状态：<br><img src="/2018/01/21/docker-helloworld/5.png" alt="pic"><br>然后启动docker,并查看docker信息（太长就不贴图了）</p>
+<p>下面的命令就是为yum添加Docker CE版本的软件源<br><code>yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo</code><br><img src="/2018/01/21/docker-helloworld/3.png" alt="pic"><br>如果出现上图中的错误，那么就执行安装yum-config-manager<br>执行:<code>yun -y install yum-utils</code><br>然后继续执行上面为yun添加Docker CE源的命令<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/2018/01/21/docker-helloworld/4.png" alt="pic" title="">
+                </div>
+                <div class="image-caption">pic</div>
+            </figure><br>然后使用yum安装docker-ce：<br><code>yum -y install docker-ce</code><br>安装完成后查看docker状态：<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/2018/01/21/docker-helloworld/5.png" alt="pic" title="">
+                </div>
+                <div class="image-caption">pic</div>
+            </figure><br>然后启动docker,并查看docker信息（太长就不贴图了）</p>
 <pre><code class="bash">systemctl start docker
 docker info
 </code></pre>
-<p><img src="/2018/01/21/docker-helloworld/6.jpeg" alt="pic">  </p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/2018/01/21/docker-helloworld/6.jpeg" alt="pic" title="">
+                </div>
+                <div class="image-caption">pic</div>
+            </figure>  
 <h2 id="简单命令"><a href="#简单命令" class="headerlink" title="简单命令"></a>简单命令</h2><ul>
 <li>docker ps -a查看全部容器(container)</li>
 <li>docker images查看镜像文件(image)，你可以理解为image是一个类class，而container就是这个类的实体，可以建立很多个实体，实体之间是隔离的</li>

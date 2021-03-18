@@ -270,7 +270,13 @@ protected Mono&lt;Void&gt; doExecute(final ServerWebExchange exchange, final Sou
     }
 </code></pre>
 <p>具体的负载均衡算法 实现了 LoadBalance 接口</p>
-<p><img src="/2021/01/28/soul-gateway-src-code-learning-12/00loadbalance_impls.png" alt="img"></p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/2021/01/28/soul-gateway-src-code-learning-12/00loadbalance_impls.png" alt="img" title="">
+                </div>
+                <div class="image-caption">img</div>
+            </figure>
 <p>可以看到有三种实现, 分别是hash, random和roundrobin, 轮询算法, 通过SPI注入机制, soul自定义了加在spi的ExtensionLoader, 后面会单独分析</p>
 <p>另外网关遇到知道upstream的状态, 这里就涉及到了探活机制</p>
 <p>具体实现在 UpstreamCheckService</p>
