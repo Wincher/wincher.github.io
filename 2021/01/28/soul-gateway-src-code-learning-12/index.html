@@ -546,13 +546,7 @@ protected Mono&lt;Void&gt; doExecute(final ServerWebExchange exchange, final Sou
     }
 </code></pre>
 <p>具体的负载均衡算法 实现了 LoadBalance 接口</p>
-<figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="/2021/01/28/soul-gateway-src-code-learning-12/00loadbalance_impls.png" alt="img" title="">
-                </div>
-                <div class="image-caption">img</div>
-            </figure>
+<p><img src="/2021/01/28/soul-gateway-src-code-learning-12/00loadbalance_impls.png" alt="img"></p>
 <p>可以看到有三种实现, 分别是hash, random和roundrobin, 轮询算法, 通过SPI注入机制, soul自定义了加在spi的ExtensionLoader, 后面会单独分析</p>
 <p>另外网关遇到知道upstream的状态, 这里就涉及到了探活机制</p>
 <p>具体实现在 UpstreamCheckService</p>
@@ -792,7 +786,7 @@ private void check(final String selectorName, final List&lt;DivideUpstream&gt; u
             </a>
             <ul class="dropdown-menu">
             <li>
-                <a class="sidebar_archives-link" href="/archives/2021/02/">February 2021<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2021/01/">January 2021<span class="sidebar_archives-count">15</span></a></li><li><a class="sidebar_archives-link" href="/archives/2020/10/">October 2020<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2020/07/">July 2020<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2019/08/">August 2019<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2019/04/">April 2019<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/archives/2019/02/">February 2019<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/04/">April 2018<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/02/">February 2018<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/01/">January 2018<span class="sidebar_archives-count">8</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/01/">January 2017<span class="sidebar_archives-count">1</span></a>
+                <a class="sidebar_archives-link" href="/archives/2021/03/">March 2021<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2021/02/">February 2021<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2021/01/">January 2021<span class="sidebar_archives-count">15</span></a></li><li><a class="sidebar_archives-link" href="/archives/2020/10/">October 2020<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2020/07/">July 2020<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2019/08/">August 2019<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2019/04/">April 2019<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/archives/2019/02/">February 2019<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/04/">April 2018<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/02/">February 2018<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/01/">January 2018<span class="sidebar_archives-count">8</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/01/">January 2017<span class="sidebar_archives-count">1</span></a>
             </ul>
         </li>
         

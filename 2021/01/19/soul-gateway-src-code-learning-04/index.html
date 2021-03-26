@@ -481,13 +481,7 @@
 </code></pre>
 <p>同样可以看到之前启动 soul-examples-http, soul-examples-dubbo 时的类似log, 显然sofa的服务也注册到了soul</p>
 <p>访问 <a href="http://127.0.0.1:9095/#/plug/sofa" target="_blank" rel="external">http://127.0.0.1:9095/#/plug/sofa</a> 同样可以看到 刚起的实例服务注册了rule 和selector 到了soul上</p>
-<figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="/2021/01/19/soul-gateway-src-code-learning-04/00register.png" alt="img" title="">
-                </div>
-                <div class="image-caption">img</div>
-            </figure>
+<p><img src="/2021/01/19/soul-gateway-src-code-learning-04/00register.png" alt="img"></p>
 <p>尝试通过网关访问 sofa 服务</p>
 <pre><code class="bash">$curl -i localhost:9195/sofa/findAll
 HTTP/1.1 200 OK
@@ -540,13 +534,7 @@ content-length: 0
 &lt;!-- sofa plugin end --&gt;
 </code></pre>
 <p>重启bootstrap 可以看到sofa plugin被加载了</p>
-<figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="/2021/01/19/soul-gateway-src-code-learning-04/01sofa_plugin_log.png" alt="img" title="">
-                </div>
-                <div class="image-caption">img</div>
-            </figure>
+<p><img src="/2021/01/19/soul-gateway-src-code-learning-04/01sofa_plugin_log.png" alt="img"></p>
 <p>再次尝试请求 </p>
 <pre><code class="bash">curl localhost:9195/sofa/findAll
 {&quot;code&quot;:200,&quot;message&quot;:&quot;Access to success!&quot;,&quot;data&quot;:{&quot;name&quot;:&quot;hello world Soul Sofa , findAll&quot;,&quot;id&quot;:&quot;1392929023&quot;}}%
@@ -773,7 +761,7 @@ content-length: 0
             </a>
             <ul class="dropdown-menu">
             <li>
-                <a class="sidebar_archives-link" href="/archives/2021/02/">February 2021<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2021/01/">January 2021<span class="sidebar_archives-count">15</span></a></li><li><a class="sidebar_archives-link" href="/archives/2020/10/">October 2020<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2020/07/">July 2020<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2019/08/">August 2019<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2019/04/">April 2019<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/archives/2019/02/">February 2019<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/04/">April 2018<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/02/">February 2018<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/01/">January 2018<span class="sidebar_archives-count">8</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/01/">January 2017<span class="sidebar_archives-count">1</span></a>
+                <a class="sidebar_archives-link" href="/archives/2021/03/">March 2021<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2021/02/">February 2021<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2021/01/">January 2021<span class="sidebar_archives-count">15</span></a></li><li><a class="sidebar_archives-link" href="/archives/2020/10/">October 2020<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2020/07/">July 2020<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2019/08/">August 2019<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2019/04/">April 2019<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/archives/2019/02/">February 2019<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/04/">April 2018<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/02/">February 2018<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/01/">January 2018<span class="sidebar_archives-count">8</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/01/">January 2017<span class="sidebar_archives-count">1</span></a>
             </ul>
         </li>
         

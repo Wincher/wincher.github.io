@@ -519,13 +519,7 @@
 2021-01-20 00:23:17.017  INFO 90924 --- [pool-1-thread-1] o.d.s.client.common.utils.RegisterUtils  : springCloud client register success: {&quot;appName&quot;:&quot;springCloud-test&quot;,&quot;context&quot;:&quot;/springcloud&quot;,&quot;path&quot;:&quot;/springcloud/order/path/**/name&quot;,&quot;pathDesc&quot;:&quot;&quot;,&quot;rpcType&quot;:&quot;springCloud&quot;,&quot;ruleName&quot;:&quot;/springcloud/order/path/**/name&quot;,&quot;enabled&quot;:true}
 </code></pre>
 <p>访问 <a href="http://127.0.0.1:9095/#/plug/springCloud" target="_blank" rel="external">http://127.0.0.1:9095/#/plug/springCloud</a> 同样可以看到 刚起的实例服务注册了rule 和selector 到了soul上</p>
-<figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="/2021/01/20/soul-gateway-src-code-learning-05/00springcloud_plugin_log.png" alt="img" title="">
-                </div>
-                <div class="image-caption">img</div>
-            </figure>
+<p><img src="/2021/01/20/soul-gateway-src-code-learning-05/00springcloud_plugin_log.png" alt="img"></p>
 <p> 直接访问 spring cloud 服务</p>
 <pre><code class="bash">$curl http://localhost:8884/order/findById\?id\=3
 {&quot;id&quot;:&quot;3&quot;,&quot;name&quot;:&quot;hello world spring cloud findById&quot;}%
@@ -699,7 +693,7 @@ final ServiceInstance serviceInstance = loadBalancer.choose(selectorHandle.getSe
             </a>
             <ul class="dropdown-menu">
             <li>
-                <a class="sidebar_archives-link" href="/archives/2021/02/">February 2021<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2021/01/">January 2021<span class="sidebar_archives-count">15</span></a></li><li><a class="sidebar_archives-link" href="/archives/2020/10/">October 2020<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2020/07/">July 2020<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2019/08/">August 2019<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2019/04/">April 2019<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/archives/2019/02/">February 2019<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/04/">April 2018<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/02/">February 2018<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/01/">January 2018<span class="sidebar_archives-count">8</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/01/">January 2017<span class="sidebar_archives-count">1</span></a>
+                <a class="sidebar_archives-link" href="/archives/2021/03/">March 2021<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2021/02/">February 2021<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2021/01/">January 2021<span class="sidebar_archives-count">15</span></a></li><li><a class="sidebar_archives-link" href="/archives/2020/10/">October 2020<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2020/07/">July 2020<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2019/08/">August 2019<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2019/04/">April 2019<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/archives/2019/02/">February 2019<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/04/">April 2018<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/02/">February 2018<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/01/">January 2018<span class="sidebar_archives-count">8</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/01/">January 2017<span class="sidebar_archives-count">1</span></a>
             </ul>
         </li>
         

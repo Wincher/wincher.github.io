@@ -462,13 +462,7 @@
                 <!-- Post Content -->
                 <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
     
-        <h2 id="SOUL-Admin-amp-网关-Zookeeper-数据同步"><a href="#SOUL-Admin-amp-网关-Zookeeper-数据同步" class="headerlink" title="SOUL Admin &amp; 网关 Zookeeper 数据同步"></a>SOUL Admin &amp; 网关 Zookeeper 数据同步</h2><figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="/2021/01/22/soul-gateway-src-code-learning-07/00sync_starters.png" alt="img" title="">
-                </div>
-                <div class="image-caption">img</div>
-            </figure>
+        <h2 id="SOUL-Admin-amp-网关-Zookeeper-数据同步"><a href="#SOUL-Admin-amp-网关-Zookeeper-数据同步" class="headerlink" title="SOUL Admin &amp; 网关 Zookeeper 数据同步"></a>SOUL Admin &amp; 网关 Zookeeper 数据同步</h2><p><img src="/2021/01/22/soul-gateway-src-code-learning-07/00sync_starters.png" alt="img"></p>
 <p>目前SOUL提供了这几种数据同步方式, 上一节我们使用了WebSocket, 这一节使用Zookeerper来做数据同步, 代码实现结构与WebSocket如出一辙, 只不过具体的同步过程使用了Zookeeper自身的特性</p>
 <p>启动 zk,我用的docker <code>docker run -p 2181:2181 --restart unless-stopped --name zk -d zookeeper</code></p>
 <p>保证 soul-bootstrap pom.xml 引入</p>
@@ -636,25 +630,13 @@ private void subscribeChildChanges(final ConfigGroupEnum groupKey, final String 
     }
 </code></pre>
 <p>打开 <a href="http://localhost:9095/#/plug/divide" target="_blank" rel="external">http://localhost:9095/#/plug/divide</a>, 点击</p>
-<figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="/2021/01/22/soul-gateway-src-code-learning-07/02sync_button.jpg" alt="img" title="">
-                </div>
-                <div class="image-caption">img</div>
-            </figure>
+<p><img src="/2021/01/22/soul-gateway-src-code-learning-07/02sync_button.jpg" alt="img"></p>
 <p>在查看zk, 发现有值了</p>
 <pre><code class="bash">[zk: localhost:2181(CONNECTED) 19] ls /soul/plugin
 [divide]
 </code></pre>
 <p>点一个插件就有一个插件的值, 这也未免太…我又找了一找, 果然 打开 <a href="http://localhost:9095/#/system/plugin" target="_blank" rel="external">http://localhost:9095/#/system/plugin</a></p>
-<p>点击 <figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="/2021/01/22/soul-gateway-src-code-learning-07/03sync_all_button.jpg" alt="img" title="">
-                </div>
-                <div class="image-caption">img</div>
-            </figure> </p>
+<p>点击 <img src="/2021/01/22/soul-gateway-src-code-learning-07/03sync_all_button.jpg" alt="img"> </p>
 <p>再次查看全部同步了</p>
 <pre><code>[zk: localhost:2181(CONNECTED) 22] ls /soul/plugin
 [context_path, divide, dubbo, hystrix, monitor, rate_limiter, resilience4j, rewrite, sentinel, sign, sofa, springCloud, tars, waf]
@@ -828,7 +810,7 @@ private void subscribeChildChanges(final ConfigGroupEnum groupKey, final String 
             </a>
             <ul class="dropdown-menu">
             <li>
-                <a class="sidebar_archives-link" href="/archives/2021/02/">February 2021<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2021/01/">January 2021<span class="sidebar_archives-count">15</span></a></li><li><a class="sidebar_archives-link" href="/archives/2020/10/">October 2020<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2020/07/">July 2020<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2019/08/">August 2019<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2019/04/">April 2019<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/archives/2019/02/">February 2019<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/04/">April 2018<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/02/">February 2018<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/01/">January 2018<span class="sidebar_archives-count">8</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/01/">January 2017<span class="sidebar_archives-count">1</span></a>
+                <a class="sidebar_archives-link" href="/archives/2021/03/">March 2021<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2021/02/">February 2021<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2021/01/">January 2021<span class="sidebar_archives-count">15</span></a></li><li><a class="sidebar_archives-link" href="/archives/2020/10/">October 2020<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2020/07/">July 2020<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2019/08/">August 2019<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2019/04/">April 2019<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/archives/2019/02/">February 2019<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/04/">April 2018<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/02/">February 2018<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/01/">January 2018<span class="sidebar_archives-count">8</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/01/">January 2017<span class="sidebar_archives-count">1</span></a>
             </ul>
         </li>
         

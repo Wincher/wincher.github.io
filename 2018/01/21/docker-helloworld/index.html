@@ -471,13 +471,7 @@
                 <!-- Post Content -->
                 <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
     
-        <h2 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h2><figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="/2018/01/21/docker-helloworld/1.png" alt="pic" title="">
-                </div>
-                <div class="image-caption">pic</div>
-            </figure>
+        <h2 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h2><p><img src="/2018/01/21/docker-helloworld/1.png" alt="pic"></p>
 <h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>按理来说应该大家看这篇文章环境可能没有装过docker，但是可能有的人装过了，我们要安装的是docker-ce也就是社区版，如果你希望安装比较新的版本请看如下操作，如果你装过了，请执行接下来的操作<br>首先查看安装的Docker<br><img src="/2018/01/21/docker-helloworld/2.png" alt="pic"><br>然后依次卸载掉</p>
 <pre><code class="bash">yum -y rmeove docker.x86_64
 yum -y rmeove docker-client.x86_64
@@ -487,29 +481,11 @@ yum -y rmeove docker-common.x86_64
 <blockquote>
 <p>然后我门添加docker-ce的源文件(不要纠结:官方源目前下载下来的版本是1.12,Docker之前是个庞大的东西，什么都做，发展到1.12版本的时候容器已经剥离出来了，在17年Docker拆分出了Moby项目，专用于容器，Docker进行产品化分为Docker CE 和Docker EE 也就是社区版和开发版本，感兴趣的话的大家可以在网上寻找Docker的发展史之类的，我们的目的就是要下载一个相对新的社区版本，应该讲明白目的了吧)</p>
 </blockquote>
-<p>下面的命令就是为yum添加Docker CE版本的软件源<br><code>yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo</code><br><img src="/2018/01/21/docker-helloworld/3.png" alt="pic"><br>如果出现上图中的错误，那么就执行安装yum-config-manager<br>执行:<code>yun -y install yum-utils</code><br>然后继续执行上面为yun添加Docker CE源的命令<br><figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="/2018/01/21/docker-helloworld/4.png" alt="pic" title="">
-                </div>
-                <div class="image-caption">pic</div>
-            </figure><br>然后使用yum安装docker-ce：<br><code>yum -y install docker-ce</code><br>安装完成后查看docker状态：<br><figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="/2018/01/21/docker-helloworld/5.png" alt="pic" title="">
-                </div>
-                <div class="image-caption">pic</div>
-            </figure><br>然后启动docker,并查看docker信息（太长就不贴图了）</p>
+<p>下面的命令就是为yum添加Docker CE版本的软件源<br><code>yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo</code><br><img src="/2018/01/21/docker-helloworld/3.png" alt="pic"><br>如果出现上图中的错误，那么就执行安装yum-config-manager<br>执行:<code>yun -y install yum-utils</code><br>然后继续执行上面为yun添加Docker CE源的命令<br><img src="/2018/01/21/docker-helloworld/4.png" alt="pic"><br>然后使用yum安装docker-ce：<br><code>yum -y install docker-ce</code><br>安装完成后查看docker状态：<br><img src="/2018/01/21/docker-helloworld/5.png" alt="pic"><br>然后启动docker,并查看docker信息（太长就不贴图了）</p>
 <pre><code class="bash">systemctl start docker
 docker info
 </code></pre>
-<figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="/2018/01/21/docker-helloworld/6.jpeg" alt="pic" title="">
-                </div>
-                <div class="image-caption">pic</div>
-            </figure>  
+<p><img src="/2018/01/21/docker-helloworld/6.jpeg" alt="pic">  </p>
 <h2 id="简单命令"><a href="#简单命令" class="headerlink" title="简单命令"></a>简单命令</h2><ul>
 <li>docker ps -a查看全部容器(container)</li>
 <li>docker images查看镜像文件(image)，你可以理解为image是一个类class，而container就是这个类的实体，可以建立很多个实体，实体之间是隔离的</li>
@@ -682,7 +658,7 @@ docker info
             </a>
             <ul class="dropdown-menu">
             <li>
-                <a class="sidebar_archives-link" href="/archives/2021/02/">February 2021<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2021/01/">January 2021<span class="sidebar_archives-count">15</span></a></li><li><a class="sidebar_archives-link" href="/archives/2020/10/">October 2020<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2020/07/">July 2020<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2019/08/">August 2019<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2019/04/">April 2019<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/archives/2019/02/">February 2019<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/04/">April 2018<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/02/">February 2018<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/01/">January 2018<span class="sidebar_archives-count">8</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/01/">January 2017<span class="sidebar_archives-count">1</span></a>
+                <a class="sidebar_archives-link" href="/archives/2021/03/">March 2021<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2021/02/">February 2021<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2021/01/">January 2021<span class="sidebar_archives-count">15</span></a></li><li><a class="sidebar_archives-link" href="/archives/2020/10/">October 2020<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2020/07/">July 2020<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2019/08/">August 2019<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2019/04/">April 2019<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/archives/2019/02/">February 2019<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/04/">April 2018<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/02/">February 2018<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/01/">January 2018<span class="sidebar_archives-count">8</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/01/">January 2017<span class="sidebar_archives-count">1</span></a>
             </ul>
         </li>
         

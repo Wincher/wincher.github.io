@@ -464,13 +464,7 @@
     
         <p>SOUL admin/bootstrap cluster</p>
 <p>模拟soul 网关集群部署, 启动2个admin, 2个bootstrap</p>
-<figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="/2021/01/26/soul-gateway-src-code-learning-10/00parallel_run.jpg" alt="img" title="">
-                </div>
-                <div class="image-caption">img</div>
-            </figure>
+<p><img src="/2021/01/26/soul-gateway-src-code-learning-10/00parallel_run.jpg" alt="img"></p>
 <p>如上开启配置可以启动多个实例,也可以打包后通过java -jar启动</p>
 <p>在<code>soul-bootstrap</code>的<code>application.yml</code>配置刚才启动的<code>soul-admin</code>的 url</p>
 <pre><code class="yaml">soul:
@@ -479,13 +473,7 @@
              urls: ws://localhost:9095/websocket,ws://localhost:9096/websocket
 </code></pre>
 <p>启动后分别打开 <a href="http://localhost:9095/#/plug/divide" target="_blank" rel="external">http://localhost:9095/#/plug/divide</a>, <a href="http://localhost:9096/#/plug/divide" target="_blank" rel="external">http://localhost:9096/#/plug/divide</a>,可以看到目前都没有数据</p>
-<figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="/2021/01/26/soul-gateway-src-code-learning-10/01no_data_admins.png" alt="img" title="">
-                </div>
-                <div class="image-caption">img</div>
-            </figure>
+<p><img src="/2021/01/26/soul-gateway-src-code-learning-10/01no_data_admins.png" alt="img"></p>
 <p>启动一个soul-examples-http, 具体可参考前面的文章</p>
 <pre><code class="bash">$curl 127.0.0.1:9195/http/order/findById\?id=1
 {&quot;id&quot;:&quot;1&quot;,&quot;name&quot;:&quot;hello world findById&quot;}%
@@ -508,13 +496,7 @@ soul:
 public OrderDTO findById(@RequestParam(&quot;id&quot;) final String id) {}
 </code></pre>
 <p>启动后做下</p>
-<figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="/2021/01/26/soul-gateway-src-code-learning-10/02diff_admin_selector.jpg" alt="img" title="">
-                </div>
-                <div class="image-caption">img</div>
-            </figure>
+<p><img src="/2021/01/26/soul-gateway-src-code-learning-10/02diff_admin_selector.jpg" alt="img"></p>
 <p>可以看到 8188 和 8189 examples-http分别注册到了 9095和9096admin, 接下来测试下</p>
 <pre><code class="bash">$url 127.0.0.1:9196/http/order/findById\?id=1
 {&quot;id&quot;:&quot;1&quot;,&quot;name&quot;:&quot;hello world findById&quot;}%
@@ -714,7 +696,7 @@ $curl 127.0.0.1:9196/http/order/9016FindById\?id=1
             </a>
             <ul class="dropdown-menu">
             <li>
-                <a class="sidebar_archives-link" href="/archives/2021/02/">February 2021<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2021/01/">January 2021<span class="sidebar_archives-count">15</span></a></li><li><a class="sidebar_archives-link" href="/archives/2020/10/">October 2020<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2020/07/">July 2020<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2019/08/">August 2019<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2019/04/">April 2019<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/archives/2019/02/">February 2019<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/04/">April 2018<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/02/">February 2018<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/01/">January 2018<span class="sidebar_archives-count">8</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/01/">January 2017<span class="sidebar_archives-count">1</span></a>
+                <a class="sidebar_archives-link" href="/archives/2021/03/">March 2021<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2021/02/">February 2021<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2021/01/">January 2021<span class="sidebar_archives-count">15</span></a></li><li><a class="sidebar_archives-link" href="/archives/2020/10/">October 2020<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2020/07/">July 2020<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2019/08/">August 2019<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2019/04/">April 2019<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/archives/2019/02/">February 2019<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/04/">April 2018<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/02/">February 2018<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/01/">January 2018<span class="sidebar_archives-count">8</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/01/">January 2017<span class="sidebar_archives-count">1</span></a>
             </ul>
         </li>
         
