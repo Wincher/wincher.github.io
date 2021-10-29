@@ -99,3 +99,32 @@ tags:
 ```
 
 然后就可以以maven项目导入idea了, idea也会主动识别, 不主动的话就右键pom.xml文件会有选项, 然后可以执行 `mvn compile` 成功变异了, 就可以愉快地在IDEA看tomcat源码了
+
+Main class设置为org.apache.catalina.startup.Bootstrap
+
+添加VM options 
+
+-Dcatalina.home=catalina-home 
+
+-Dcatalina.base=catalina-home 
+
+-Djava.endorsed.dirs=catalina-home/endorsed 
+
+-Djava.io.tmpdir=catalina-home/temp 
+
+-Djava.util.logging.manager=org.apache.juli.ClassLoaderLogManager 
+
+-Djava.util.logging.config.file=catalina-home/conf/logging.properties
+
+说明：如果编译build的时候出现Test测试代码报错，注释该代码即可。本文中的Tomcat源码util.TestCookieFilter类会报错，将其注释即可。
+
+四、启动项目
+上面第三步已经构建了项目的运行环境，点击运行或者调试按钮后，正常运行。
+
+项目启动完毕我们可以测试了，在浏览器访问http://localhost:8080/  发现打不开我们看到的经典欢迎页面了，页面报了一个错
+
+
+
+原因是我们直接启动org.apache.catalina.startup.Bootstrap的时候没有加载org.apache.jasper.servlet.JasperInitializer，从而无法编译JSP。解决办法是在tomcat的源码org.apache.catalina.startup.ContextConfig中手动将JSP解析器初始化：
+
+line 776: context.addServletContainerInitializer(new JasperInitializer(), null);
